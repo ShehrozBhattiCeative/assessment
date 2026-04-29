@@ -1,0 +1,347 @@
+[
+  {
+    "id": "doc-001",
+    "name": "Dr. Harshil Patel",
+    "specialty": "Paediatrics",
+    "qualification": "MBBS · MD (Paediatrics) · Fellowship in Neonatology",
+    "image": "/images/doctors/harshil-patel.jpg",
+    "bio": "Dr. Harshil Patel is a dedicated paediatrician with over 12 years of experience in child healthcare. He specialises in neonatal care and has helped thousands of families navigate complex paediatric conditions with compassion and clinical excellence.",
+    "availability": [
+      {
+        "day": "Monday",
+        "startTime": "09:00",
+        "endTime": "13:00"
+      },
+      {
+        "day": "Wednesday",
+        "startTime": "09:00",
+        "endTime": "13:00"
+      },
+      {
+        "day": "Friday",
+        "startTime": "14:00",
+        "endTime": "18:00"
+      }
+    ],
+    "fee": 800,
+    "departmentId": "dept-001",
+    "experience": 12,
+    "rating": 4.9,
+    "totalPatients": 4200,
+    "isActive": true,
+    "createdAt": "2024-01-10T08:00:00.000Z",
+    "updatedAt": "2024-12-01T08:00:00.000Z"
+  },
+  {
+    "id": "doc-002",
+    "name": "Dr. Sahil Achhava",
+    "specialty": "Neurology",
+    "qualification": "MBBS · MD · DM (Neurology)",
+    "image": "/images/doctors/sahil-achhava.jpg",
+    "bio": "Dr. Sahil Achhava is a renowned neurologist specialising in stroke management, epilepsy, and neurodegenerative disorders. With 15 years of experience, he leads the Stroke Centre at NexusAI and has pioneered several minimally invasive neurological procedures.",
+    "availability": [
+      {
+        "day": "Tuesday",
+        "startTime": "10:00",
+        "endTime": "14:00"
+      },
+      {
+        "day": "Thursday",
+        "startTime": "10:00",
+        "endTime": "14:00"
+      },
+      {
+        "day": "Saturday",
+        "startTime": "09:00",
+        "endTime": "12:00"
+      }
+    ],
+    "fee": 1200,
+    "departmentId": "dept-002",
+    "experience": 15,
+    "rating": 4.8,
+    "totalPatients": 3800,
+    "isActive": true,
+    "createdAt": "2024-01-10T08:00:00.000Z",
+    "updatedAt": "2024-12-01T08:00:00.000Z"
+  },
+  {
+    "id": "doc-003",
+    "name": "Dr. Dhruv Shah",
+    "specialty": "General Surgery",
+    "qualification": "MBBS · MS (General Surgery) · DNB",
+    "image": "/images/doctors/dhruv-shah.jpg",
+    "bio": "Dr. Dhruv Shah is an accomplished general surgeon with expertise in laparoscopic and robotic surgeries. He has performed over 5,000 surgical procedures and is known for his precision, patient safety focus, and excellent post-operative outcomes.",
+    "availability": [
+      {
+        "day": "Monday",
+        "startTime": "14:00",
+        "endTime": "18:00"
+      },
+      {
+        "day": "Wednesday",
+        "startTime": "14:00",
+        "endTime": "18:00"
+      },
+      {
+        "day": "Friday",
+        "startTime": "09:00",
+        "endTime": "13:00"
+      }
+    ],
+    "fee": 1000,
+    "departmentId": "dept-003",
+    "experience": 18,
+    "rating": 4.9,
+    "totalPatients": 5200,
+    "isActive": true,
+    "createdAt": "2024-01-10T08:00:00.000Z",
+    "updatedAt": "2024-12-01T08:00:00.000Z"
+  },
+  {
+    "id": "doc-004",
+    "name": "Dr. Yagnesh Patel",
+    "specialty": "Dermatology",
+    "qualification": "MBBS · MD (Dermatology)",
+    "image": "/images/doctors/yagnesh-patel.jpg",
+    "bio": "Dr. Yagnesh Patel is a leading dermatologist with 10 years of experience in treating skin, hair, and nail disorders. He specialises in cosmetic dermatology, laser treatments, and complex dermatological conditions including psoriasis and eczema.",
+    "availability": [
+      {
+        "day": "Tuesday",
+        "startTime": "09:00",
+        "endTime": "13:00"
+      },
+      {
+        "day": "Thursday",
+        "startTime": "14:00",
+        "endTime": "18:00"
+      },
+      {
+        "day": "Saturday",
+        "startTime": "09:00",
+        "endTime": "12:00"
+      }
+    ],
+    "fee": 700,
+    "departmentId": "dept-004",
+    "experience": 10,
+    "rating": 4.7,
+    "totalPatients": 3100,
+    "isActive": true,
+    "createdAt": "2024-01-10T08:00:00.000Z",
+    "updatedAt": "2024-12-01T08:00:00.000Z"
+  },
+  {
+    "id": "doc-005",
+    "name": "Dr. Priya Mehta",
+    "specialty": "Cardiology",
+    "qualification": "MBBS · MD · DM (Cardiology) · FACC",
+    "image": "/images/doctors/priya-mehta.jpg",
+    "bio": "Dr. Priya Mehta is a highly regarded interventional cardiologist with 20 years of experience. She specialises in coronary angioplasty, heart failure management, and preventive cardiology. She has successfully treated over 6,000 cardiac patients.",
+    "availability": [
+      {
+        "day": "Monday",
+        "startTime": "09:00",
+        "endTime": "13:00"
+      },
+      {
+        "day": "Wednesday",
+        "startTime": "09:00",
+        "endTime": "13:00"
+      },
+      {
+        "day": "Friday",
+        "startTime": "09:00",
+        "endTime": "13:00"
+      }
+    ],
+    "fee": 1500,
+    "departmentId": "dept-005",
+    "experience": 20,
+    "rating": 4.9,
+    "totalPatients": 6100,
+    "isActive": true,
+    "createdAt": "2024-01-10T08:00:00.000Z",
+    "updatedAt": "2024-12-01T08:00:00.000Z"
+  },
+  {
+    "id": "doc-006",
+    "name": "Dr. Ramneek Mahajan",
+    "specialty": "Orthopaedics",
+    "qualification": "MBBS · MS (Orthopaedics) · Fellowship in Joint Replacement",
+    "image": "/images/doctors/ramneek-mahajan.jpg",
+    "bio": "Dr. Ramneek Mahajan is an expert orthopaedic surgeon specialising in joint replacement and sports medicine. He has performed over 4,000 knee and hip replacements and is a pioneer in minimally invasive joint surgeries in the region.",
+    "availability": [
+      {
+        "day": "Tuesday",
+        "startTime": "14:00",
+        "endTime": "18:00"
+      },
+      {
+        "day": "Thursday",
+        "startTime": "09:00",
+        "endTime": "13:00"
+      },
+      {
+        "day": "Saturday",
+        "startTime": "09:00",
+        "endTime": "12:00"
+      }
+    ],
+    "fee": 1100,
+    "departmentId": "dept-006",
+    "experience": 16,
+    "rating": 4.8,
+    "totalPatients": 4400,
+    "isActive": true,
+    "createdAt": "2024-01-10T08:00:00.000Z",
+    "updatedAt": "2024-12-01T08:00:00.000Z"
+  },
+  {
+    "id": "doc-007",
+    "name": "Dr. Anant Kumar",
+    "specialty": "Nephrology & Urology",
+    "qualification": "MBBS · MD · DM (Nephrology) · MCh (Urology)",
+    "image": "/images/doctors/anant-kumar.jpg",
+    "bio": "Dr. Anant Kumar is a distinguished nephrologist and urologist with expertise in kidney transplantation, dialysis management, and robotic urology. He performed the first robot-assisted kidney transplant in the region and has over 22 years of experience.",
+    "availability": [
+      {
+        "day": "Monday",
+        "startTime": "14:00",
+        "endTime": "18:00"
+      },
+      {
+        "day": "Wednesday",
+        "startTime": "14:00",
+        "endTime": "18:00"
+      },
+      {
+        "day": "Friday",
+        "startTime": "14:00",
+        "endTime": "18:00"
+      }
+    ],
+    "fee": 1400,
+    "departmentId": "dept-007",
+    "experience": 22,
+    "rating": 4.9,
+    "totalPatients": 5800,
+    "isActive": true,
+    "createdAt": "2024-01-10T08:00:00.000Z",
+    "updatedAt": "2024-12-01T08:00:00.000Z"
+  },
+  {
+    "id": "doc-008",
+    "name": "Dr. Vandana Soni",
+    "specialty": "Nutrition & Dietetics",
+    "qualification": "MBBS · MD · Fellowship in Clinical Nutrition",
+    "image": "/images/doctors/vandana-soni.jpg",
+    "bio": "Dr. Vandana Soni is a specialist in clinical nutrition and metabolic disorders. With 14 years of experience, she has helped thousands of patients manage obesity, diabetes, thyroid disorders, and eating disorders through evidence-based nutritional therapy.",
+    "availability": [
+      {
+        "day": "Tuesday",
+        "startTime": "09:00",
+        "endTime": "13:00"
+      },
+      {
+        "day": "Thursday",
+        "startTime": "09:00",
+        "endTime": "13:00"
+      },
+      {
+        "day": "Saturday",
+        "startTime": "13:00",
+        "endTime": "17:00"
+      }
+    ],
+    "fee": 600,
+    "departmentId": "dept-008",
+    "experience": 14,
+    "rating": 4.7,
+    "totalPatients": 2900,
+    "isActive": true,
+    "createdAt": "2024-01-10T08:00:00.000Z",
+    "updatedAt": "2024-12-01T08:00:00.000Z"
+  },
+  {
+    "id": "doc-009",
+    "name": "Dr. Suresh Iyer",
+    "specialty": "Gastroenterology",
+    "qualification": "MBBS · MD · DM (Gastroenterology)",
+    "image": "/images/doctors/suresh-iyer.jpg",
+    "bio": "Dr. Suresh Iyer is a senior gastroenterologist with 17 years of experience in digestive diseases, liver disorders, and therapeutic endoscopy. He is known for his expertise in complex GI procedures and inflammatory bowel disease management.",
+    "availability": [
+      {
+        "day": "Monday",
+        "startTime": "09:00",
+        "endTime": "13:00"
+      },
+      {
+        "day": "Thursday",
+        "startTime": "14:00",
+        "endTime": "18:00"
+      },
+      {
+        "day": "Saturday",
+        "startTime": "09:00",
+        "endTime": "12:00"
+      }
+    ],
+    "fee": 1000,
+    "departmentId": "dept-009",
+    "experience": 17,
+    "rating": 4.8,
+    "totalPatients": 4700,
+    "isActive": true,
+    "createdAt": "2024-01-10T08:00:00.000Z",
+    "updatedAt": "2024-12-01T08:00:00.000Z"
+  },
+  {
+    "id": "doc-010",
+    "name": "Dr. Kavita Nair",
+    "specialty": "Obstetrics & Gynaecology",
+    "qualification": "MBBS · MS (OBG) · DNB · Fellowship in Reproductive Medicine",
+    "image": "/images/doctors/kavita-nair.jpg",
+    "bio": "Dr. Kavita Nair is a senior obstetrician and gynaecologist with 19 years of experience in high-risk pregnancies, laparoscopic gynaecological surgeries, and reproductive medicine. She has successfully delivered over 8,000 babies and is renowned for her maternal care excellence.",
+    "availability": [
+      {
+        "day": "Tuesday",
+        "startTime": "10:00",
+        "endTime": "14:00"
+      },
+      {
+        "day": "Wednesday",
+        "startTime": "14:00",
+        "endTime": "18:00"
+      },
+      {
+        "day": "Friday",
+        "startTime": "09:00",
+        "endTime": "13:00"
+      }
+    ],
+    "fee": 1200,
+    "departmentId": "dept-010",
+    "experience": 19,
+    "rating": 4.9,
+    "totalPatients": 7200,
+    "isActive": true,
+    "createdAt": "2024-01-10T08:00:00.000Z",
+    "updatedAt": "2024-12-01T08:00:00.000Z"
+  },
+  {
+    "id": "doc-c49cbc3f",
+    "name": "Malcolm Dale",
+    "specialty": "At id alias excepte",
+    "qualification": "Omnis dolorem exerci",
+    "bio": "At eaque at mollit m",
+    "fee": 69,
+    "experience": 39,
+    "departmentId": "dept-007",
+    "isActive": true,
+    "rating": 5,
+    "totalPatients": 0,
+    "createdAt": "2026-04-29T09:33:07.708Z",
+    "updatedAt": "2026-04-29T09:33:07.708Z"
+  }
+]

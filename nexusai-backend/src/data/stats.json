@@ -1,0 +1,17 @@
+{
+  "beds": 300,
+  "specialties": 45,
+  "operationTheatres": 17,
+  "emergency": "24/7",
+  "icuBeds": 96,
+  "accreditation": "NABH Accredited",
+  "award": "Best Hospital — 2020",
+  "totalPatients": 440000,
+  "totalDoctors": 150,
+  "yearsOfExperience": 25,
+  "campusSize": "10 acres",
+  "builtUpArea": "440,000 sq ft",
+  "ambulances": 12,
+  "laserSurgeries": 5000,
+  "transplants": 800
+}

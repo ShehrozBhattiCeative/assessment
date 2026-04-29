@@ -1,0 +1,112 @@
+[
+  {
+    "id": "test-001",
+    "patientName": "Aditi Sharma",
+    "patientAvatar": "/images/testimonials/aditi-sharma.jpg",
+    "rating": 5,
+    "review": "The cardiac care team at NexusAI is truly world-class. Dr. Priya Mehta's expertise and the warmth of the nursing staff made my bypass surgery recovery so much smoother than I imagined. From admission to discharge, every step was handled with professionalism and compassion. I couldn't have chosen a better hospital.",
+    "treatment": "Cardiac Care",
+    "year": 2024,
+    "isActive": true,
+    "createdAt": "2024-09-15T08:00:00.000Z"
+  },
+  {
+    "id": "test-002",
+    "patientName": "Rohit Patel",
+    "patientAvatar": "/images/testimonials/rohit-patel.jpg",
+    "rating": 5,
+    "review": "After suffering from knee pain for years, I was finally able to get my knee replaced at NexusAI. Dr. Ramneek Mahajan's robotic-assisted surgery technique was incredible — I was walking within 24 hours and back to normal within 6 weeks. The physiotherapy team provided outstanding support throughout my recovery.",
+    "treatment": "Orthopaedics",
+    "year": 2024,
+    "isActive": true,
+    "createdAt": "2024-07-20T08:00:00.000Z"
+  },
+  {
+    "id": "test-003",
+    "patientName": "Meera Joshi",
+    "patientAvatar": "/images/testimonials/meera-joshi.jpg",
+    "rating": 5,
+    "review": "I had been suffering from debilitating migraines for over three years. Dr. Sahil Achhava in the Neurology department correctly diagnosed my condition within the first consultation and developed a comprehensive treatment plan. For the first time in years, I am living without daily headaches. Truly life-changing.",
+    "treatment": "Neurology",
+    "year": 2024,
+    "isActive": true,
+    "createdAt": "2024-06-10T08:00:00.000Z"
+  },
+  {
+    "id": "test-004",
+    "patientName": "Vikram Singh",
+    "patientAvatar": "/images/testimonials/vikram-singh.jpg",
+    "rating": 5,
+    "review": "My son was born premature at 28 weeks and spent 45 days in the NICU at NexusAI. The neonatology team, led by Dr. Harshil Patel, was extraordinary. They kept us informed every step of the way and treated our son with such care. He is now a healthy 2-year-old, and we owe it entirely to this team.",
+    "treatment": "Neonatology",
+    "year": 2024,
+    "isActive": true,
+    "createdAt": "2024-04-05T08:00:00.000Z"
+  },
+  {
+    "id": "test-005",
+    "patientName": "Sunita Reddy",
+    "patientAvatar": "/images/testimonials/sunita-reddy.jpg",
+    "rating": 5,
+    "review": "After being diagnosed with breast cancer, I was terrified. The oncology team at NexusAI walked me through every treatment option with patience and clarity. The combined surgery, chemotherapy, and radiation therapy was executed seamlessly. I completed treatment six months ago and am now cancer-free. NexusAI gave me my life back.",
+    "treatment": "Oncology",
+    "year": 2024,
+    "isActive": true,
+    "createdAt": "2024-11-20T08:00:00.000Z"
+  },
+  {
+    "id": "test-006",
+    "patientName": "Arjun Kapoor",
+    "patientAvatar": "/images/testimonials/arjun-kapoor.jpg",
+    "rating": 5,
+    "review": "I received a kidney transplant at NexusAI under Dr. Anant Kumar's care. The robot-assisted procedure was minimally invasive and my recovery was remarkably fast. The transplant team's coordination — from pre-surgical evaluation to post-operative care — was flawless. I went home in just 4 days. Exceptional hospital.",
+    "treatment": "Kidney Transplant",
+    "year": 2024,
+    "isActive": true,
+    "createdAt": "2024-08-30T08:00:00.000Z"
+  },
+  {
+    "id": "test-007",
+    "patientName": "Pooja Gupta",
+    "patientAvatar": "/images/testimonials/pooja-gupta.jpg",
+    "rating": 5,
+    "review": "I had my LASIK surgery at NexusAI's ophthalmology department and went from -5.5 vision to perfect 6/6 in both eyes. The procedure was painless, took less than 15 minutes, and the entire staff made me feel completely at ease. Dr. Sharma's precision and expertise are unmatched. Best decision I've ever made for my health.",
+    "treatment": "LASIK Surgery",
+    "year": 2024,
+    "isActive": true,
+    "createdAt": "2024-05-15T08:00:00.000Z"
+  },
+  {
+    "id": "test-008",
+    "patientName": "Ramesh Nair",
+    "patientAvatar": "/images/testimonials/ramesh-nair.jpg",
+    "rating": 5,
+    "review": "The emergency care team at NexusAI saved my husband's life when he had a stroke. We arrived within the golden hour and the stroke team acted with incredible speed and precision. The clot was removed within 90 minutes of symptom onset. My husband has made a near-complete recovery. We are forever grateful.",
+    "treatment": "Stroke Care",
+    "year": 2024,
+    "isActive": true,
+    "createdAt": "2024-10-08T08:00:00.000Z"
+  },
+  {
+    "id": "test-009",
+    "patientName": "Lakshmi Iyer",
+    "patientAvatar": "/images/testimonials/lakshmi-iyer.jpg",
+    "rating": 5,
+    "review": "After struggling with infertility for three years, we turned to NexusAI's IVF centre. The reproductive medicine team was extraordinarily supportive — medically and emotionally. Our third IVF cycle resulted in the birth of our twin daughters. The care and expertise here are exceptional, and the team truly became our family during those difficult months.",
+    "treatment": "IVF & Reproductive Medicine",
+    "year": 2024,
+    "isActive": true,
+    "createdAt": "2024-12-01T08:00:00.000Z"
+  },
+  {
+    "id": "test-010",
+    "patientName": "Deepak Sharma",
+    "patientAvatar": "/images/testimonials/deepak-sharma.jpg",
+    "rating": 5,
+    "review": "I underwent a complex liver transplant at NexusAI after being in end-stage liver failure. The hepatology and transplant team's expertise, combined with the hospital's world-class infrastructure, gave me a second chance at life. It has been one year since my transplant and I feel better than I have in a decade. NexusAI is truly extraordinary.",
+    "treatment": "Liver Transplant",
+    "year": 2024,
+    "isActive": true,
+    "createdAt": "2024-03-22T08:00:00.000Z"
+  }
+]
