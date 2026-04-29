@@ -91,39 +91,65 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
   if (!isAuthenticated || user?.role !== 'admin') {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#f8fafc]">
-        <div className="animate-spin h-10 w-10 border-2 border-[#0f4c81] border-t-transparent rounded-full" />
+      <div
+        className="min-h-screen flex items-center justify-center"
+        style={{ background: 'var(--bg-primary)' }}
+      >
+        <div style={{
+          width: 40, height: 40,
+          borderRadius: '50%',
+          border: '2px solid var(--accent)',
+          borderTopColor: 'transparent',
+          animation: 'spin 0.8s linear infinite',
+        }} />
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-[#f8fafc] flex">
+    <div className="min-h-screen flex" style={{ background: 'var(--bg-primary)' }}>
       <Sidebar
         sections={adminNavSections}
         isOpen={sidebarOpen}
         onClose={() => setSidebarOpen(false)}
         logo={
-          <Link href="/admin" className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#0f4c81] to-[#1a6bb5] flex items-center justify-center">
-              <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+          <Link href="/admin" style={{ display: 'flex', alignItems: 'center', gap: 12, textDecoration: 'none' }}>
+            <div style={{
+              width: 36, height: 36, borderRadius: 10,
+              background: 'var(--grad-primary)',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              flexShrink: 0,
+            }}>
+              <svg className="w-4 h-4" fill="none" stroke="white" strokeWidth="2.5" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
               </svg>
             </div>
             <div>
-              <p className="font-bold text-[#0f4c81] font-[var(--font-heading)] text-sm">Unity Hospital</p>
-              <p className="text-[#9ca3af] text-xs">Admin Panel</p>
+              <p style={{ fontWeight: 700, color: '#ffffff', fontFamily: 'var(--font-heading)', fontSize: 14, margin: 0, lineHeight: 1.3 }}>Unity Hospital</p>
+              <p style={{ color: 'rgba(255,255,255,0.4)', fontSize: 11, margin: 0 }}>Admin Panel</p>
             </div>
           </Link>
         }
         footer={
-          <div className="flex items-center gap-3">
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
             <Avatar name={user?.name} size="sm" />
-            <div className="flex-1 min-w-0">
-              <p className="text-sm font-medium text-[#1a1a2e] truncate">{user?.name}</p>
-              <p className="text-xs text-[#9ca3af] truncate">{user?.email}</p>
+            <div style={{ flex: 1, minWidth: 0 }}>
+              <p style={{ fontSize: 13, fontWeight: 500, color: 'rgba(255,255,255,0.85)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', margin: 0 }}>{user?.name}</p>
+              <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.4)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', margin: 0 }}>{user?.email}</p>
             </div>
-            <button onClick={() => logout()} title="Logout" className="p-1.5 rounded-lg hover:bg-[#f3f4f6] text-[#9ca3af] hover:text-[#ef4444] transition-colors">
+            <button
+              onClick={() => logout()}
+              title="Logout"
+              style={{
+                padding: 6, borderRadius: 8, border: 'none',
+                background: 'transparent', cursor: 'pointer',
+                color: 'rgba(255,255,255,0.4)',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                transition: 'background 0.2s, color 0.2s',
+              }}
+              onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(251,113,133,0.15)'; e.currentTarget.style.color = '#fb7185'; }}
+              onMouseLeave={(e) => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'rgba(255,255,255,0.4)'; }}
+            >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
               </svg>
@@ -134,18 +160,46 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
       <div className="flex-1 lg:ml-[260px] flex flex-col min-h-screen">
         {/* Top bar */}
-        <header className="bg-white border-b border-[#e2e8f0] h-16 flex items-center px-6 gap-4 sticky top-0 z-10">
+        <header
+          className="h-16 flex items-center px-6 gap-4 sticky top-0 z-10"
+          style={{
+            background: '#0b1020',
+            borderBottom: '1px solid rgba(255,255,255,0.06)',
+          }}
+        >
           <button
             onClick={() => setSidebarOpen(true)}
-            className="lg:hidden p-2 rounded-xl hover:bg-[#f3f4f6] text-[#374151]"
+            className="lg:hidden"
+            style={{
+              padding: 8, borderRadius: 8, border: 'none',
+              background: 'transparent', cursor: 'pointer',
+              color: 'rgba(255,255,255,0.6)',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              transition: 'color 0.18s',
+            }}
+            onMouseEnter={(e) => (e.currentTarget.style.color = '#ffffff')}
+            onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(255,255,255,0.6)')}
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
             </svg>
           </button>
           <div className="flex-1" />
-          <Link href="/" className="text-sm text-[#6b7280] hover:text-[#0f4c81] transition-colors flex items-center gap-1">
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
+          <Link
+            href="/"
+            style={{
+              fontSize: 13,
+              color: 'rgba(255,255,255,0.5)',
+              textDecoration: 'none',
+              display: 'flex', alignItems: 'center', gap: 4,
+              transition: 'color 0.18s',
+            }}
+            onMouseEnter={(e) => (e.currentTarget.style.color = 'rgba(255,255,255,0.9)')}
+            onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(255,255,255,0.5)')}
+          >
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+            </svg>
             View Site
           </Link>
           <Avatar name={user?.name} size="sm" className="cursor-pointer" />

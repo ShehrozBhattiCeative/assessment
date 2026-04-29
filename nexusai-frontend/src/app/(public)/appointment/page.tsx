@@ -23,10 +23,10 @@ const schema = z.object({
 type FormData = z.infer<typeof schema>;
 
 const inputStyle: React.CSSProperties = {
-  width: '100%', padding: '11px 14px',
-  background: 'var(--bg-secondary)', border: '1px solid var(--border)',
-  borderRadius: 8, fontSize: 14, color: 'var(--text-primary)',
-  outline: 'none',
+  width: '100%', padding: '11px 16px',
+  background: 'var(--bg-primary)', border: '1px solid var(--border)',
+  borderRadius: 12, fontSize: 14, color: 'var(--text-primary)',
+  outline: 'none', transition: 'border-color 0.2s, box-shadow 0.2s',
 };
 
 function AppointmentContent() {
@@ -103,7 +103,8 @@ function AppointmentContent() {
 
       {/* Progress Steps */}
       <div style={{
-        background: 'var(--bg-nav)', borderBottom: '1px solid rgba(255,255,255,0.08)',
+        background: 'var(--bg-card)', borderBottom: '1px solid var(--border)',
+        backdropFilter: 'blur(20px)',
         padding: '16px 0', position: 'sticky', top: 68, zIndex: 40,
       }}>
         <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 16 }}>
@@ -114,20 +115,23 @@ function AppointmentContent() {
                   width: 36, height: 36, borderRadius: '50%', display: 'flex',
                   alignItems: 'center', justifyContent: 'center',
                   fontSize: 14, fontWeight: 700,
-                  background: step >= s.num ? 'var(--accent)' : 'rgba(255,255,255,0.1)',
-                  color: '#fff',
+                  background: step >= s.num ? 'var(--grad-primary)' : 'var(--bg-secondary)',
+                  color: step >= s.num ? '#04060c' : 'var(--text-secondary)',
+                  border: step >= s.num ? 'none' : '1px solid var(--border)',
+                  transition: 'all 0.3s var(--ease)',
                 }}>
                   {step > s.num ? '✓' : s.num}
                 </div>
                 <span style={{
                   fontSize: 14, fontWeight: 500,
-                  color: step >= s.num ? '#fff' : 'rgba(255,255,255,0.4)',
+                  color: step >= s.num ? 'var(--text-primary)' : 'var(--text-muted)',
+                  transition: 'color 0.3s',
                 }}>
                   {s.label}
                 </span>
               </div>
               {i < steps.length - 1 && (
-                <div style={{ width: 48, height: 2, background: step > s.num ? 'var(--accent)' : 'rgba(255,255,255,0.15)' }} />
+                <div style={{ width: 48, height: 2, background: step > s.num ? 'var(--accent)' : 'var(--border)', transition: 'background 0.3s', borderRadius: 2 }} />
               )}
             </div>
           ))}
@@ -138,8 +142,8 @@ function AppointmentContent() {
         {/* Step 1: Select Doctor */}
         {step === 1 && (
           <div>
-            <h2 style={{ fontSize: 24, fontWeight: 700, color: 'var(--text-primary)', marginBottom: 24 }}>Choose Your Doctor</h2>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 24 }}>
+            <h2 style={{ fontSize: 24, fontWeight: 700, fontFamily: 'var(--font-heading)', color: 'var(--text-primary)', marginBottom: 24, letterSpacing: '-0.02em' }}>Choose Your Doctor</h2>
+            <div className="doctors-grid">
               {doctors.map((doc) => (
                 <div
                   key={doc.id}
@@ -147,7 +151,8 @@ function AppointmentContent() {
                   style={{
                     cursor: 'pointer', borderRadius: 'var(--radius)',
                     border: selectedDoctor?.id === doc.id ? '2px solid var(--accent)' : '2px solid transparent',
-                    transition: 'all 0.2s',
+                    transition: 'all 0.2s var(--ease)',
+                    boxShadow: selectedDoctor?.id === doc.id ? '0 0 0 4px var(--accent-light)' : 'none',
                   }}
                 >
                   <DoctorCard doctor={doc} />
@@ -160,31 +165,32 @@ function AppointmentContent() {
         {/* Step 2: Date & Time */}
         {step === 2 && selectedDoctor && (
           <div style={{ maxWidth: 640, margin: '0 auto' }}>
-            <h2 style={{ fontSize: 24, fontWeight: 700, color: 'var(--text-primary)', marginBottom: 24 }}>
+            <h2 style={{ fontSize: 24, fontWeight: 700, fontFamily: 'var(--font-heading)', color: 'var(--text-primary)', marginBottom: 24, letterSpacing: '-0.02em' }}>
               Date & Time for {selectedDoctor.name}
             </h2>
             <div style={{
               background: 'var(--bg-card)', border: '1px solid var(--border)',
-              borderRadius: 'var(--radius)', padding: 36,
+              borderRadius: 'var(--radius-lg)', padding: 36,
             }}>
               <div style={{ marginBottom: 28 }}>
                 <label style={{ fontSize: 13, fontWeight: 500, color: 'var(--text-primary)', display: 'block', marginBottom: 8 }}>
-                  Select Date <span style={{ color: '#ef4444' }}>*</span>
+                  Select Date <span style={{ color: '#fb7185' }}>*</span>
                 </label>
                 <input
                   type="date"
                   min={minDate}
                   value={selectedDate}
                   onChange={(e) => setSelectedDate(e.target.value)}
-                  style={{ ...inputStyle }}
-                  className="input-base"
+                  style={inputStyle}
+                  onFocus={e => { e.currentTarget.style.borderColor = 'var(--accent)'; e.currentTarget.style.boxShadow = '0 0 0 3px var(--accent-light)'; }}
+                  onBlur={e => { e.currentTarget.style.borderColor = 'var(--border)'; e.currentTarget.style.boxShadow = 'none'; }}
                 />
               </div>
 
               {selectedDate && (
                 <div style={{ marginBottom: 28 }}>
                   <label style={{ fontSize: 13, fontWeight: 500, color: 'var(--text-primary)', display: 'block', marginBottom: 12 }}>
-                    Select Time Slot <span style={{ color: '#ef4444' }}>*</span>
+                    Select Time Slot <span style={{ color: '#fb7185' }}>*</span>
                   </label>
                   <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 10 }}>
                     {APPOINTMENT_TIMES.map((time) => (
@@ -193,11 +199,11 @@ function AppointmentContent() {
                         type="button"
                         onClick={() => setSelectedTime(time)}
                         style={{
-                          padding: '10px 8px', borderRadius: 8, fontSize: 13, fontWeight: 500,
-                          background: selectedTime === time ? 'var(--accent)' : 'var(--bg-secondary)',
-                          color: selectedTime === time ? '#fff' : 'var(--text-primary)',
-                          border: `1px solid ${selectedTime === time ? 'var(--accent)' : 'var(--border)'}`,
-                          cursor: 'pointer', transition: 'all 0.2s',
+                          padding: '10px 8px', borderRadius: 10, fontSize: 13, fontWeight: 500,
+                          background: selectedTime === time ? 'var(--grad-primary)' : 'var(--bg-secondary)',
+                          color: selectedTime === time ? '#04060c' : 'var(--text-primary)',
+                          border: `1px solid ${selectedTime === time ? 'transparent' : 'var(--border)'}`,
+                          cursor: 'pointer', transition: 'all 0.2s var(--ease)',
                         }}
                       >
                         {time}
@@ -211,7 +217,7 @@ function AppointmentContent() {
               )}
 
               {selectedDoctor.availability?.length > 0 && (
-                <div style={{ background: 'var(--accent-light)', borderRadius: 10, padding: '16px 20px', marginBottom: 28 }}>
+                <div style={{ background: 'var(--accent-light)', borderRadius: 12, padding: '16px 20px', marginBottom: 28 }}>
                   <p style={{ fontWeight: 600, color: 'var(--accent)', marginBottom: 10, fontSize: 13 }}>Doctor Availability</p>
                   {selectedDoctor.availability.map((slot: any) => (
                     <div key={slot.day} style={{ display: 'flex', justifyContent: 'space-between', fontSize: 13, padding: '6px 0', borderBottom: '1px solid var(--border)' }}>
@@ -229,7 +235,10 @@ function AppointmentContent() {
                   style={{
                     padding: '12px 24px', borderRadius: 'var(--radius-btn)', fontWeight: 600, fontSize: 14,
                     background: 'transparent', color: 'var(--text-secondary)', border: '1px solid var(--border)', cursor: 'pointer',
+                    transition: 'border-color 0.2s',
                   }}
+                  onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--accent)'; e.currentTarget.style.color = 'var(--text-primary)'; }}
+                  onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--border)'; e.currentTarget.style.color = 'var(--text-secondary)'; }}
                 >
                   ← Back
                 </button>
@@ -238,8 +247,11 @@ function AppointmentContent() {
                   onClick={() => { if (!selectedDate || !selectedTime) { toast.error('Please select date and time'); return; } setStep(3); }}
                   style={{
                     flex: 1, padding: '12px', borderRadius: 'var(--radius-btn)', fontWeight: 600, fontSize: 14,
-                    background: 'var(--accent)', color: '#fff', border: 'none', cursor: 'pointer',
+                    background: 'var(--grad-primary)', color: '#04060c', border: 'none', cursor: 'pointer',
+                    transition: 'all 0.2s var(--ease)',
                   }}
+                  onMouseEnter={e => { e.currentTarget.style.filter = 'brightness(1.08)'; e.currentTarget.style.transform = 'translateY(-1px)'; }}
+                  onMouseLeave={e => { e.currentTarget.style.filter = 'none'; e.currentTarget.style.transform = 'translateY(0)'; }}
                 >
                   Continue →
                 </button>
@@ -251,13 +263,13 @@ function AppointmentContent() {
         {/* Step 3: Patient Info */}
         {step === 3 && (
           <div style={{ maxWidth: 640, margin: '0 auto' }}>
-            <h2 style={{ fontSize: 24, fontWeight: 700, color: 'var(--text-primary)', marginBottom: 24 }}>Your Information</h2>
+            <h2 style={{ fontSize: 24, fontWeight: 700, fontFamily: 'var(--font-heading)', color: 'var(--text-primary)', marginBottom: 24, letterSpacing: '-0.02em' }}>Your Information</h2>
 
             {!isAuthenticated && (
               <div style={{
                 marginBottom: 20, padding: '14px 18px',
-                background: 'rgba(245,158,11,0.1)', border: '1px solid rgba(245,158,11,0.35)',
-                borderRadius: 10, fontSize: 14, color: 'var(--text-primary)',
+                background: 'rgba(245,158,11,0.08)', border: '1px solid rgba(245,158,11,0.25)',
+                borderRadius: 12, fontSize: 14, color: 'var(--text-primary)',
               }}>
                 <strong>Login required</strong> —{' '}
                 <Link href="/login" style={{ color: 'var(--accent)', textDecoration: 'underline' }}>Login</Link> or{' '}
@@ -265,9 +277,9 @@ function AppointmentContent() {
               </div>
             )}
 
-            <div style={{ background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 'var(--radius)', padding: 36 }}>
+            <div style={{ background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 'var(--radius-lg)', padding: 36 }}>
               {/* Summary */}
-              <div style={{ background: 'var(--accent-light)', borderRadius: 10, padding: '18px 20px', marginBottom: 28 }}>
+              <div style={{ background: 'var(--accent-light)', borderRadius: 12, padding: '18px 20px', marginBottom: 28 }}>
                 <p style={{ fontWeight: 600, color: 'var(--accent)', marginBottom: 12, fontSize: 13 }}>Appointment Summary</p>
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10, fontSize: 13 }}>
                   <div><span style={{ color: 'var(--text-secondary)' }}>Doctor: </span><span style={{ fontWeight: 500, color: 'var(--text-primary)' }}>{selectedDoctor?.name}</span></div>
@@ -281,24 +293,33 @@ function AppointmentContent() {
               <form onSubmit={handleSubmit(onSubmit)} style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
                 <div>
                   <label style={{ fontSize: 13, fontWeight: 500, color: 'var(--text-primary)', display: 'block', marginBottom: 6 }}>
-                    Full Name <span style={{ color: '#ef4444' }}>*</span>
+                    Full Name <span style={{ color: '#fb7185' }}>*</span>
                   </label>
-                  <input type="text" {...register('patientName')} style={inputStyle} className="input-base" placeholder="Your full name" />
-                  {errors.patientName && <p style={{ fontSize: 12, color: '#ef4444', marginTop: 4 }}>{errors.patientName.message}</p>}
+                  <input type="text" {...register('patientName')} style={inputStyle} placeholder="Your full name"
+                    onFocus={e => { e.currentTarget.style.borderColor = 'var(--accent)'; e.currentTarget.style.boxShadow = '0 0 0 3px var(--accent-light)'; }}
+                    onBlur={e => { e.currentTarget.style.borderColor = 'var(--border)'; e.currentTarget.style.boxShadow = 'none'; }}
+                  />
+                  {errors.patientName && <p style={{ fontSize: 12, color: '#fb7185', marginTop: 4 }}>{errors.patientName.message}</p>}
                 </div>
                 <div>
                   <label style={{ fontSize: 13, fontWeight: 500, color: 'var(--text-primary)', display: 'block', marginBottom: 6 }}>
-                    Email Address <span style={{ color: '#ef4444' }}>*</span>
+                    Email Address <span style={{ color: '#fb7185' }}>*</span>
                   </label>
-                  <input type="email" {...register('patientEmail')} style={inputStyle} className="input-base" placeholder="your@email.com" />
-                  {errors.patientEmail && <p style={{ fontSize: 12, color: '#ef4444', marginTop: 4 }}>{errors.patientEmail.message}</p>}
+                  <input type="email" {...register('patientEmail')} style={inputStyle} placeholder="your@email.com"
+                    onFocus={e => { e.currentTarget.style.borderColor = 'var(--accent)'; e.currentTarget.style.boxShadow = '0 0 0 3px var(--accent-light)'; }}
+                    onBlur={e => { e.currentTarget.style.borderColor = 'var(--border)'; e.currentTarget.style.boxShadow = 'none'; }}
+                  />
+                  {errors.patientEmail && <p style={{ fontSize: 12, color: '#fb7185', marginTop: 4 }}>{errors.patientEmail.message}</p>}
                 </div>
                 <div>
                   <label style={{ fontSize: 13, fontWeight: 500, color: 'var(--text-primary)', display: 'block', marginBottom: 6 }}>
-                    Phone Number <span style={{ color: '#ef4444' }}>*</span>
+                    Phone Number <span style={{ color: '#fb7185' }}>*</span>
                   </label>
-                  <input type="tel" {...register('patientPhone')} style={inputStyle} className="input-base" placeholder="+91 XXXXX XXXXX" />
-                  {errors.patientPhone && <p style={{ fontSize: 12, color: '#ef4444', marginTop: 4 }}>{errors.patientPhone.message}</p>}
+                  <input type="tel" {...register('patientPhone')} style={inputStyle} placeholder="+91 XXXXX XXXXX"
+                    onFocus={e => { e.currentTarget.style.borderColor = 'var(--accent)'; e.currentTarget.style.boxShadow = '0 0 0 3px var(--accent-light)'; }}
+                    onBlur={e => { e.currentTarget.style.borderColor = 'var(--border)'; e.currentTarget.style.boxShadow = 'none'; }}
+                  />
+                  {errors.patientPhone && <p style={{ fontSize: 12, color: '#fb7185', marginTop: 4 }}>{errors.patientPhone.message}</p>}
                 </div>
                 <div>
                   <label style={{ fontSize: 13, fontWeight: 500, color: 'var(--text-primary)', display: 'block', marginBottom: 6 }}>
@@ -309,7 +330,8 @@ function AppointmentContent() {
                     rows={3}
                     placeholder="Symptoms, previous records, or any other information…"
                     style={{ ...inputStyle, resize: 'none' }}
-                    className="input-base"
+                    onFocus={e => { e.currentTarget.style.borderColor = 'var(--accent)'; e.currentTarget.style.boxShadow = '0 0 0 3px var(--accent-light)'; }}
+                    onBlur={e => { e.currentTarget.style.borderColor = 'var(--border)'; e.currentTarget.style.boxShadow = 'none'; }}
                   />
                 </div>
                 <div style={{ display: 'flex', gap: 12 }}>
@@ -319,7 +341,10 @@ function AppointmentContent() {
                     style={{
                       padding: '12px 24px', borderRadius: 'var(--radius-btn)', fontWeight: 600, fontSize: 14,
                       background: 'transparent', color: 'var(--text-secondary)', border: '1px solid var(--border)', cursor: 'pointer',
+                      transition: 'border-color 0.2s',
                     }}
+                    onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--accent)'; e.currentTarget.style.color = 'var(--text-primary)'; }}
+                    onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--border)'; e.currentTarget.style.color = 'var(--text-secondary)'; }}
                   >
                     ← Back
                   </button>
@@ -328,9 +353,12 @@ function AppointmentContent() {
                     disabled={loading}
                     style={{
                       flex: 1, padding: '12px', borderRadius: 'var(--radius-btn)', fontWeight: 600, fontSize: 14,
-                      background: loading ? 'var(--text-secondary)' : 'var(--accent)',
-                      color: '#fff', border: 'none', cursor: loading ? 'not-allowed' : 'pointer',
+                      background: loading ? 'var(--text-muted)' : 'var(--grad-primary)',
+                      color: '#04060c', border: 'none', cursor: loading ? 'not-allowed' : 'pointer',
+                      transition: 'all 0.2s var(--ease)',
                     }}
+                    onMouseEnter={e => { if (!loading) { e.currentTarget.style.filter = 'brightness(1.08)'; e.currentTarget.style.transform = 'translateY(-1px)'; } }}
+                    onMouseLeave={e => { e.currentTarget.style.filter = 'none'; e.currentTarget.style.transform = 'translateY(0)'; }}
                   >
                     {loading ? 'Booking…' : 'Confirm Booking'}
                   </button>

@@ -23,13 +23,17 @@ export function Footer() {
           {/* Brand */}
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
-              <div style={{ width: 34, height: 34, borderRadius: 8, background: '#e05c38', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <div style={{
+                width: 34, height: 34, borderRadius: 8,
+                background: 'var(--grad-primary)',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+              }}>
                 <svg width="16" height="16" fill="white" viewBox="0 0 24 24">
                   <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 3c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zm7 13H5v-.23c0-.62.28-1.2.76-1.58C7.47 15.82 9.64 15 12 15s4.53.82 6.24 2.19c.48.38.76.97.76 1.58V19z"/>
                 </svg>
               </div>
               <div>
-                <p style={{ fontWeight: 700, fontSize: 16, color: '#ffffff' }}>Unity</p>
+                <p style={{ fontWeight: 700, fontSize: 16, color: '#ffffff', fontFamily: 'var(--font-heading)' }}>Unity</p>
                 <p style={{ fontSize: 10, color: 'rgba(255,255,255,0.4)' }}>Hospital</p>
               </div>
             </div>
@@ -43,7 +47,20 @@ export function Footer() {
                 { icon: 'M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z', label: 'Twitter' },
                 { icon: 'M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z M4 6a2 2 0 100-4 2 2 0 000 4z', label: 'LinkedIn' },
               ].map((s) => (
-                <button key={s.label} aria-label={s.label} style={{ width: 34, height: 34, borderRadius: 6, border: '1px solid rgba(255,255,255,0.12)', background: 'transparent', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'rgba(255,255,255,0.5)' }}>
+                <button
+                  key={s.label}
+                  aria-label={s.label}
+                  style={{
+                    width: 34, height: 34, borderRadius: 6,
+                    border: '1px solid rgba(255,255,255,0.12)',
+                    background: 'transparent', cursor: 'pointer',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    color: 'rgba(255,255,255,0.5)',
+                    transition: 'border-color 0.2s, color 0.2s',
+                  }}
+                  onMouseEnter={(e) => { e.currentTarget.style.borderColor = 'var(--accent)'; e.currentTarget.style.color = 'var(--accent)'; }}
+                  onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.12)'; e.currentTarget.style.color = 'rgba(255,255,255,0.5)'; }}
+                >
                   <svg width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
                     <path d={s.icon} />
                   </svg>
@@ -54,13 +71,16 @@ export function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h4 style={{ fontWeight: 600, color: '#ffffff', marginBottom: 18, fontSize: 14 }}>Quick Links</h4>
+            <h4 style={{ fontWeight: 600, color: '#ffffff', marginBottom: 18, fontSize: 14, fontFamily: 'var(--font-heading)' }}>Quick Links</h4>
             <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 10 }}>
               {QUICK_LINKS.map((l) => (
                 <li key={l.href}>
-                  <Link href={l.href} style={{ color: 'rgba(255,255,255,0.45)', fontSize: 14, textDecoration: 'none', transition: 'color 0.2s' }}
-                    onMouseEnter={(e) => e.currentTarget.style.color = '#e05c38'}
-                    onMouseLeave={(e) => e.currentTarget.style.color = 'rgba(255,255,255,0.45)'}>
+                  <Link
+                    href={l.href}
+                    style={{ color: 'rgba(255,255,255,0.45)', fontSize: 14, textDecoration: 'none', transition: 'color 0.2s' }}
+                    onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--accent)')}
+                    onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(255,255,255,0.45)')}
+                  >
                     {l.label}
                   </Link>
                 </li>
@@ -70,13 +90,16 @@ export function Footer() {
 
           {/* Specialities */}
           <div>
-            <h4 style={{ fontWeight: 600, color: '#ffffff', marginBottom: 18, fontSize: 14 }}>Specialities</h4>
+            <h4 style={{ fontWeight: 600, color: '#ffffff', marginBottom: 18, fontSize: 14, fontFamily: 'var(--font-heading)' }}>Specialities</h4>
             <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 10 }}>
               {SPECIALITIES.map((s) => (
                 <li key={s}>
-                  <Link href="/services" style={{ color: 'rgba(255,255,255,0.45)', fontSize: 14, textDecoration: 'none', transition: 'color 0.2s' }}
-                    onMouseEnter={(e) => e.currentTarget.style.color = '#e05c38'}
-                    onMouseLeave={(e) => e.currentTarget.style.color = 'rgba(255,255,255,0.45)'}>
+                  <Link
+                    href="/services"
+                    style={{ color: 'rgba(255,255,255,0.45)', fontSize: 14, textDecoration: 'none', transition: 'color 0.2s' }}
+                    onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--accent)')}
+                    onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(255,255,255,0.45)')}
+                  >
                     {s}
                   </Link>
                 </li>
@@ -86,7 +109,7 @@ export function Footer() {
 
           {/* Contact */}
           <div>
-            <h4 style={{ fontWeight: 600, color: '#ffffff', marginBottom: 18, fontSize: 14 }}>Contact</h4>
+            <h4 style={{ fontWeight: 600, color: '#ffffff', marginBottom: 18, fontSize: 14, fontFamily: 'var(--font-heading)' }}>Contact</h4>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
               {[
                 { icon: 'M17.657 16.657L13.414 20.9a2 2 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z M15 11a3 3 0 11-6 0 3 3 0 016 0z', text: 'Vaishnodevi Circle, SG Road, Ahmedabad, IN' },
@@ -95,7 +118,13 @@ export function Footer() {
                 { icon: 'M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z', text: 'Mon–Sat · Open 24/7' },
               ].map((item, i) => (
                 <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: 10 }}>
-                  <svg width="15" height="15" fill="none" stroke="#e05c38" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24" style={{ flexShrink: 0, marginTop: 2 }}>
+                  <svg
+                    width="15" height="15" fill="none"
+                    stroke="var(--accent)"
+                    strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+                    viewBox="0 0 24 24"
+                    style={{ flexShrink: 0, marginTop: 2 }}
+                  >
                     <path d={item.icon} />
                   </svg>
                   <span style={{ color: 'rgba(255,255,255,0.45)', fontSize: 14, lineHeight: 1.5 }}>{item.text}</span>
@@ -112,9 +141,13 @@ export function Footer() {
           <p style={{ color: 'rgba(255,255,255,0.3)', fontSize: 13 }}>© 2024 Unity Hospital. All rights reserved.</p>
           <div style={{ display: 'flex', gap: 24 }}>
             {['Privacy Policy', 'Terms of Service'].map((t) => (
-              <Link key={t} href="#" style={{ color: 'rgba(255,255,255,0.3)', fontSize: 13, textDecoration: 'none', transition: 'color 0.2s' }}
-                onMouseEnter={(e) => e.currentTarget.style.color = '#e05c38'}
-                onMouseLeave={(e) => e.currentTarget.style.color = 'rgba(255,255,255,0.3)'}>
+              <Link
+                key={t}
+                href="#"
+                style={{ color: 'rgba(255,255,255,0.3)', fontSize: 13, textDecoration: 'none', transition: 'color 0.2s' }}
+                onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--accent)')}
+                onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(255,255,255,0.3)')}
+              >
                 {t}
               </Link>
             ))}

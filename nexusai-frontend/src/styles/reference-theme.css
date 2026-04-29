@@ -1,0 +1,183 @@
+/*
+ * REFERENCE DESIGN TOKENS
+ * Extracted from: https://nirravv.github.io/Hospital-Management-Html/index.html
+ * Source repo:    https://github.com/nirravv/Hospital-Management-Html (master branch, assets/css/modern.css)
+ *
+ * This file is the single source of truth for all visual design decisions.
+ * Do not use these variables directly in components — they are mapped to the
+ * theme variables in globals.css (:root / [data-theme="dark"]).
+ */
+
+/* ─── TYPOGRAPHY ──────────────────────────────────────────────────────────────
+   Fonts loaded via Google Fonts (add to layout <head>):
+   Inter: body copy, labels, UI text
+   Space Grotesk: headings, display text
+   Import URL:
+     https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap
+*/
+:root {
+  --ref-font-body:    'Inter', system-ui, -apple-system, sans-serif;
+  --ref-font-heading: 'Space Grotesk', 'Inter', sans-serif;
+
+  --ref-font-size-xs:   0.75rem;   /* 12px */
+  --ref-font-size-sm:   0.875rem;  /* 14px */
+  --ref-font-size-base: 1rem;      /* 16px */
+  --ref-font-size-lg:   1.125rem;  /* 18px */
+  --ref-font-size-xl:   1.25rem;   /* 20px */
+  --ref-font-size-2xl:  1.5rem;    /* 24px */
+  --ref-font-size-3xl:  1.875rem;  /* 30px */
+  --ref-font-size-4xl:  clamp(2.6rem, 6vw, 5rem); /* hero */
+
+  --ref-font-weight-normal:   400;
+  --ref-font-weight-medium:   500;
+  --ref-font-weight-semibold: 600;
+  --ref-font-weight-bold:     700;
+
+  --ref-line-height-body:    1.65;
+  --ref-line-height-heading: 1.15;
+
+  --ref-letter-spacing-heading: -0.025em;
+  --ref-letter-spacing-hero:    -0.035em;
+
+  /* ─── DARK THEME (DEFAULT) ────────────────────────────────────────────────
+     The reference site ships dark as default; light is opt-in via
+     [data-theme="light"] on <html>.
+  */
+
+  /* Backgrounds */
+  --ref-dark-bg:       #05070d;       /* page background, deepest layer */
+  --ref-dark-bg-soft:  #0b1020;       /* secondary surfaces, sidebar */
+  --ref-dark-surface:  rgba(255, 255, 255, 0.04); /* card / panel fill */
+  --ref-dark-surface2: rgba(255, 255, 255, 0.06); /* card hover fill */
+
+  /* Borders */
+  --ref-dark-border:        rgba(255, 255, 255, 0.08);  /* default border */
+  --ref-dark-border-strong: rgba(255, 255, 255, 0.14);  /* focus / hover border */
+
+  /* Text */
+  --ref-dark-text:      #e6ecff;  /* primary body text */
+  --ref-dark-text-dim:  #9aa3be;  /* secondary / caption text */
+  --ref-dark-text-mute: #6b7290;  /* placeholder / disabled */
+
+  /* Brand / Accent palette */
+  --ref-brand:    #22d3ee;  /* cyan  — primary CTA, links, highlights */
+  --ref-brand-2:  #a78bfa;  /* violet — secondary accent */
+  --ref-brand-3:  #34d399;  /* emerald — success, positive states */
+  --ref-brand-4:  #f472b6;  /* pink — used in gradient tail */
+  --ref-danger:   #fb7185;  /* error / destructive actions */
+  --ref-warning:  #f59e0b;  /* star ratings, warnings */
+
+  /* Gradients */
+  --ref-grad-primary:      linear-gradient(135deg, #22d3ee 0%, #a78bfa 60%, #f472b6 100%);
+  --ref-grad-primary-soft: linear-gradient(135deg,
+      rgba(34,  211, 238, 0.25) 0%,
+      rgba(167, 139, 250, 0.25) 60%,
+      rgba(244, 114, 182, 0.25) 100%);
+  --ref-grad-emerald: linear-gradient(135deg, #34d399, #22d3ee);
+  --ref-grad-violet:  linear-gradient(135deg, #a78bfa, #f472b6);
+
+  /* Shadows (dark) */
+  --ref-dark-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --ref-dark-shadow:    0 10px 30px -10px rgba(0, 0, 0, 0.6);
+  --ref-dark-shadow-lg: 0 30px 80px -20px rgba(0, 0, 0, 0.7);
+  --ref-dark-shadow-btn: 0 10px 30px -10px rgba(34, 211, 238, 0.55); /* cyan glow on primary btn */
+
+  /* ─── LIGHT THEME ─────────────────────────────────────────────────────────
+     Applied via [data-theme="light"] selector.
+     Brand/accent colors are unchanged between themes.
+  */
+
+  /* Backgrounds */
+  --ref-light-bg:       #f7f8fc;   /* page background */
+  --ref-light-bg-soft:  #ffffff;   /* elevated surfaces */
+  --ref-light-surface:  rgba(10, 14, 30, 0.04); /* card fill */
+  --ref-light-surface2: rgba(10, 14, 30, 0.06); /* card hover fill */
+
+  /* Borders */
+  --ref-light-border:        rgba(10, 14, 30, 0.08);
+  --ref-light-border-strong: rgba(10, 14, 30, 0.16);
+
+  /* Text */
+  --ref-light-text:      #0b1220;  /* primary body text */
+  --ref-light-text-dim:  #3c4560;  /* secondary text */
+  --ref-light-text-mute: #6b7290;  /* placeholder / disabled */
+
+  /* Shadows (light) */
+  --ref-light-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.06);
+  --ref-light-shadow:    0 10px 30px -10px rgba(0, 0, 0, 0.12);
+  --ref-light-shadow-lg: 0 30px 80px -20px rgba(0, 0, 0, 0.15);
+
+  /* ─── SHAPE & MOTION ──────────────────────────────────────────────────────*/
+
+  /* Border radius */
+  --ref-radius:    18px;    /* cards, modals, inputs */
+  --ref-radius-lg: 26px;    /* large panels */
+  --ref-radius-btn: 999px;  /* pill-shaped buttons & chips */
+
+  /* Easing */
+  --ref-ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* Transitions */
+  --ref-transition:      0.3s var(--ref-ease);
+  --ref-transition-fast: 0.15s var(--ref-ease);
+
+  /* ─── NAVBAR ──────────────────────────────────────────────────────────────
+     Floating pill navbar, frosted glass style.
+  */
+  --ref-nav-bg-dark:  rgba(11, 16, 32, 0.55);    /* dark mode navbar fill */
+  --ref-nav-bg-light: rgba(247, 248, 252, 0.75);  /* light mode navbar fill */
+  --ref-nav-blur:     saturate(140%) blur(20px);   /* backdrop-filter value */
+  --ref-nav-top:      18px;                        /* floating offset from top */
+  --ref-nav-padding:  12px 18px 12px 22px;
+
+  /* ─── BUTTON STYLES ───────────────────────────────────────────────────────
+     .btn-primary  → gradient (cyan→violet→pink), pill shape, dark text
+     .btn-ghost    → transparent surface fill, themed border
+     .btn-outline  → transparent bg, strong border
+  */
+  --ref-btn-padding:       12px 22px;
+  --ref-btn-font-size:     14px;
+  --ref-btn-font-weight:   500;
+  --ref-btn-primary-color: #04060c;  /* text on gradient button (dark for contrast) */
+  --ref-btn-primary-shadow: 0 10px 30px -10px rgba(34, 211, 238, 0.55);
+  --ref-btn-primary-hover-shadow: 0 16px 40px -10px rgba(167, 139, 250, 0.7);
+
+  /* ─── TEXT / PARAGRAPH COLORS ────────────────────────────────────────────
+     Dark mode paragraph colors
+       h1–h6 (headings):    #e6ecff  (--ref-dark-text)
+       p, li, body copy:    #e6ecff  (--ref-dark-text)
+       secondary / caption: #9aa3be  (--ref-dark-text-dim)
+       muted / placeholder: #6b7290  (--ref-dark-text-mute)
+
+     Light mode paragraph colors
+       h1–h6 (headings):    #0b1220  (--ref-light-text)
+       p, li, body copy:    #0b1220  (--ref-light-text)
+       secondary / caption: #3c4560  (--ref-light-text-dim)
+       muted / placeholder: #6b7290  (--ref-light-text-mute)
+  */
+
+  /* ─── SEMANTIC / STATUS COLORS ───────────────────────────────────────────
+     These do not change between themes.
+  */
+  --ref-success:    #34d399;   /* emerald green */
+  --ref-success-bg: rgba(52, 211, 153, 0.12);
+  --ref-error:      #fb7185;   /* soft red */
+  --ref-error-bg:   rgba(251, 113, 133, 0.12);
+  --ref-warning:    #f59e0b;   /* amber */
+  --ref-warning-bg: rgba(245, 158, 11, 0.12);
+  --ref-info:       #22d3ee;   /* cyan */
+  --ref-info-bg:    rgba(34, 211, 238, 0.12);
+
+  /* ─── CARD COMPONENT ─────────────────────────────────────────────────────
+     Cards use semi-transparent surface fills and a subtle border.
+     On hover: border strengthens, background deepens, card lifts 4px.
+  */
+  --ref-card-padding:       28px;
+  --ref-card-radius:        18px;   /* matches --ref-radius */
+  --ref-card-hover-lift:    translateY(-4px);
+
+  /* ─── SECTION / LAYOUT ───────────────────────────────────────────────────*/
+  --ref-section-padding:    80px 0;
+  --ref-container-max:      1240px;
+  --ref-hero-padding:       160px 0 80px;
+}

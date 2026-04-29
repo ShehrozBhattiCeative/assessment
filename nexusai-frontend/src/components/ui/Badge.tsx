@@ -1,5 +1,4 @@
-import { HTMLAttributes } from 'react';
-import { cn } from '@/lib/utils';
+import { CSSProperties, HTMLAttributes } from 'react';
 
 type BadgeVariant = 'primary' | 'accent' | 'success' | 'warning' | 'error' | 'info' | 'neutral' | 'pending' | 'confirmed' | 'cancelled' | 'completed';
 
@@ -9,46 +8,58 @@ interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {
   dot?: boolean;
 }
 
-const variantClasses: Record<BadgeVariant, string> = {
-  primary: 'bg-[#eff6ff] text-[#0f4c81] border border-[#bfdbfe]',
-  accent: 'bg-[#fff7ed] text-[#c05a35] border border-[#fed7aa]',
-  success: 'bg-[#d1fae5] text-[#065f46] border border-[#6ee7b7]',
-  warning: 'bg-[#fef3c7] text-[#78350f] border border-[#fcd34d]',
-  error: 'bg-[#fee2e2] text-[#991b1b] border border-[#fca5a5]',
-  info: 'bg-[#dbeafe] text-[#1e40af] border border-[#93c5fd]',
-  neutral: 'bg-[#f3f4f6] text-[#374151] border border-[#d1d5db]',
-  pending: 'bg-[#fef3c7] text-[#92400e] border border-[#fcd34d]',
-  confirmed: 'bg-[#d1fae5] text-[#065f46] border border-[#6ee7b7]',
-  cancelled: 'bg-[#fee2e2] text-[#991b1b] border border-[#fca5a5]',
-  completed: 'bg-[#f3f4f6] text-[#374151] border border-[#d1d5db]',
+const VARIANT_STYLES: Record<BadgeVariant, CSSProperties> = {
+  primary:   { background: 'rgba(34,211,238,0.12)',  color: '#22d3ee', border: '1px solid rgba(34,211,238,0.25)' },
+  accent:    { background: 'rgba(167,139,250,0.12)', color: '#a78bfa', border: '1px solid rgba(167,139,250,0.25)' },
+  success:   { background: 'rgba(52,211,153,0.12)',  color: '#34d399', border: '1px solid rgba(52,211,153,0.25)' },
+  warning:   { background: 'rgba(245,158,11,0.12)',  color: '#f59e0b', border: '1px solid rgba(245,158,11,0.25)' },
+  error:     { background: 'rgba(251,113,133,0.12)', color: '#fb7185', border: '1px solid rgba(251,113,133,0.25)' },
+  info:      { background: 'rgba(34,211,238,0.12)',  color: '#22d3ee', border: '1px solid rgba(34,211,238,0.25)' },
+  neutral:   { background: 'var(--bg-card)',         color: 'var(--text-secondary)', border: '1px solid var(--border)' },
+  pending:   { background: 'rgba(245,158,11,0.12)',  color: '#f59e0b', border: '1px solid rgba(245,158,11,0.25)' },
+  confirmed: { background: 'rgba(52,211,153,0.12)',  color: '#34d399', border: '1px solid rgba(52,211,153,0.25)' },
+  cancelled: { background: 'rgba(251,113,133,0.12)', color: '#fb7185', border: '1px solid rgba(251,113,133,0.25)' },
+  completed: { background: 'var(--bg-card)',         color: 'var(--text-secondary)', border: '1px solid var(--border)' },
 };
 
-const dotColors: Record<BadgeVariant, string> = {
-  primary: 'bg-[#0f4c81]',
-  accent: 'bg-[#e8734a]',
-  success: 'bg-[#10b981]',
-  warning: 'bg-[#f59e0b]',
-  error: 'bg-[#ef4444]',
-  info: 'bg-[#3b82f6]',
-  neutral: 'bg-[#6b7280]',
-  pending: 'bg-[#f59e0b]',
-  confirmed: 'bg-[#10b981]',
-  cancelled: 'bg-[#ef4444]',
-  completed: 'bg-[#6b7280]',
+const DOT_COLORS: Record<BadgeVariant, string> = {
+  primary:   '#22d3ee',
+  accent:    '#a78bfa',
+  success:   '#34d399',
+  warning:   '#f59e0b',
+  error:     '#fb7185',
+  info:      '#22d3ee',
+  neutral:   'var(--text-secondary)',
+  pending:   '#f59e0b',
+  confirmed: '#34d399',
+  cancelled: '#fb7185',
+  completed: 'var(--text-secondary)',
 };
 
-export function Badge({ variant = 'neutral', size = 'md', dot = false, className, children, ...props }: BadgeProps) {
+export function Badge({ variant = 'neutral', size = 'md', dot = false, style, children, ...props }: BadgeProps) {
   return (
     <span
-      className={cn(
-        'inline-flex items-center gap-1.5 font-medium rounded-full',
-        size === 'sm' ? 'px-2 py-0.5 text-xs' : 'px-3 py-1 text-xs',
-        variantClasses[variant],
-        className
-      )}
+      style={{
+        display: 'inline-flex',
+        alignItems: 'center',
+        gap: 6,
+        fontWeight: 500,
+        borderRadius: 999,
+        fontSize: 12,
+        padding: size === 'sm' ? '2px 8px' : '4px 12px',
+        fontFamily: 'var(--font-body)',
+        ...VARIANT_STYLES[variant],
+        ...style,
+      }}
       {...props}
     >
-      {dot && <span className={cn('w-1.5 h-1.5 rounded-full', dotColors[variant])} />}
+      {dot && (
+        <span style={{
+          width: 6, height: 6, borderRadius: '50%',
+          background: DOT_COLORS[variant],
+          flexShrink: 0,
+        }} />
+      )}
       {children}
     </span>
   );

@@ -57,10 +57,10 @@ const INFO_ITEMS = [
 ];
 
 const inputStyle: React.CSSProperties = {
-  width: '100%', padding: '11px 14px',
-  background: 'var(--bg-secondary)', border: '1px solid var(--border)',
-  borderRadius: 8, fontSize: 14, color: 'var(--text-primary)',
-  outline: 'none', transition: 'border-color 0.2s',
+  width: '100%', padding: '11px 16px',
+  background: 'var(--bg-primary)', border: '1px solid var(--border)',
+  borderRadius: 12, fontSize: 14, color: 'var(--text-primary)',
+  outline: 'none', transition: 'border-color 0.2s, box-shadow 0.2s',
 };
 
 export default function ContactPage() {
@@ -87,13 +87,17 @@ export default function ContactPage() {
         <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px', display: 'grid', gridTemplateColumns: '1fr 1.4fr', gap: 56 }}>
           {/* Info Cards */}
           <div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 16, marginBottom: 24 }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 14, marginBottom: 20 }}>
               {INFO_ITEMS.map((item) => (
                 <div key={item.label} style={{
                   display: 'flex', alignItems: 'flex-start', gap: 16,
                   background: 'var(--bg-card)', border: '1px solid var(--border)',
                   borderRadius: 'var(--radius)', padding: '20px 24px',
-                }}>
+                  transition: 'border-color 0.2s',
+                }}
+                  onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--accent)'; }}
+                  onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--border)'; }}
+                >
                   <div style={{
                     width: 44, height: 44, background: 'var(--accent-light)',
                     borderRadius: 10, display: 'flex', alignItems: 'center',
@@ -102,10 +106,10 @@ export default function ContactPage() {
                     {item.icon}
                   </div>
                   <div>
-                    <p style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 4 }}>
+                    <p style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.12em', marginBottom: 4 }}>
                       {item.label}
                     </p>
-                    <p style={{ fontSize: 15, color: 'var(--text-primary)', fontWeight: 500, lineHeight: 1.5 }}>{item.value}</p>
+                    <p style={{ fontSize: 14, color: 'var(--text-primary)', fontWeight: 500, lineHeight: 1.5 }}>{item.value}</p>
                   </div>
                 </div>
               ))}
@@ -113,13 +117,15 @@ export default function ContactPage() {
 
             {/* Emergency Badge */}
             <div style={{
-              background: '#dc2626', borderRadius: 'var(--radius)',
+              background: 'linear-gradient(135deg,rgba(251,113,133,0.12) 0%,rgba(239,68,68,0.08) 100%)',
+              border: '1px solid rgba(251,113,133,0.3)',
+              borderRadius: 'var(--radius)',
               padding: '20px 24px',
             }}>
-              <p style={{ fontWeight: 700, fontSize: 16, color: '#fff', marginBottom: 4 }}>
+              <p style={{ fontFamily: 'var(--font-heading)', fontWeight: 700, fontSize: 16, color: '#fb7185', marginBottom: 4 }}>
                 Emergency · 24/7
               </p>
-              <p style={{ color: 'rgba(255,255,255,0.8)', fontSize: 14 }}>
+              <p style={{ color: 'var(--text-secondary)', fontSize: 14, lineHeight: 1.6 }}>
                 Ambulance on call — dial +91 88666 00555 for immediate assistance.
               </p>
             </div>
@@ -128,9 +134,9 @@ export default function ContactPage() {
           {/* Contact Form */}
           <div style={{
             background: 'var(--bg-card)', border: '1px solid var(--border)',
-            borderRadius: 'var(--radius)', padding: '40px 40px',
+            borderRadius: 'var(--radius-lg)', padding: '40px',
           }}>
-            <h3 style={{ fontWeight: 700, fontSize: 22, color: 'var(--text-primary)', marginBottom: 8 }}>
+            <h3 style={{ fontFamily: 'var(--font-heading)', fontWeight: 700, fontSize: 22, color: 'var(--text-primary)', marginBottom: 8, letterSpacing: '-0.02em' }}>
               Send us a message
             </h3>
             <p style={{ color: 'var(--text-secondary)', fontSize: 14, marginBottom: 32 }}>
@@ -141,17 +147,23 @@ export default function ContactPage() {
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
                 <div>
                   <label style={{ fontSize: 13, fontWeight: 500, color: 'var(--text-primary)', display: 'block', marginBottom: 6 }}>
-                    Name <span style={{ color: '#ef4444' }}>*</span>
+                    Name <span style={{ color: '#fb7185' }}>*</span>
                   </label>
-                  <input type="text" {...register('name')} placeholder="Your full name" style={inputStyle} className="input-base" />
-                  {errors.name && <p style={{ fontSize: 12, color: '#ef4444', marginTop: 4 }}>{errors.name.message}</p>}
+                  <input type="text" {...register('name')} placeholder="Your full name" style={inputStyle}
+                    onFocus={e => { e.currentTarget.style.borderColor = 'var(--accent)'; e.currentTarget.style.boxShadow = '0 0 0 3px var(--accent-light)'; }}
+                    onBlur={e => { e.currentTarget.style.borderColor = 'var(--border)'; e.currentTarget.style.boxShadow = 'none'; }}
+                  />
+                  {errors.name && <p style={{ fontSize: 12, color: '#fb7185', marginTop: 4 }}>{errors.name.message}</p>}
                 </div>
                 <div>
                   <label style={{ fontSize: 13, fontWeight: 500, color: 'var(--text-primary)', display: 'block', marginBottom: 6 }}>
-                    Email <span style={{ color: '#ef4444' }}>*</span>
+                    Email <span style={{ color: '#fb7185' }}>*</span>
                   </label>
-                  <input type="email" {...register('email')} placeholder="your@email.com" style={inputStyle} className="input-base" />
-                  {errors.email && <p style={{ fontSize: 12, color: '#ef4444', marginTop: 4 }}>{errors.email.message}</p>}
+                  <input type="email" {...register('email')} placeholder="your@email.com" style={inputStyle}
+                    onFocus={e => { e.currentTarget.style.borderColor = 'var(--accent)'; e.currentTarget.style.boxShadow = '0 0 0 3px var(--accent-light)'; }}
+                    onBlur={e => { e.currentTarget.style.borderColor = 'var(--border)'; e.currentTarget.style.boxShadow = 'none'; }}
+                  />
+                  {errors.email && <p style={{ fontSize: 12, color: '#fb7185', marginTop: 4 }}>{errors.email.message}</p>}
                 </div>
               </div>
 
@@ -159,29 +171,36 @@ export default function ContactPage() {
                 <label style={{ fontSize: 13, fontWeight: 500, color: 'var(--text-primary)', display: 'block', marginBottom: 6 }}>
                   Mobile
                 </label>
-                <input type="tel" {...register('phone')} placeholder="+91 XXXXX XXXXX" style={inputStyle} className="input-base" />
+                <input type="tel" {...register('phone')} placeholder="+91 XXXXX XXXXX" style={inputStyle}
+                  onFocus={e => { e.currentTarget.style.borderColor = 'var(--accent)'; e.currentTarget.style.boxShadow = '0 0 0 3px var(--accent-light)'; }}
+                  onBlur={e => { e.currentTarget.style.borderColor = 'var(--border)'; e.currentTarget.style.boxShadow = 'none'; }}
+                />
               </div>
 
               <div>
                 <label style={{ fontSize: 13, fontWeight: 500, color: 'var(--text-primary)', display: 'block', marginBottom: 6 }}>
-                  Subject <span style={{ color: '#ef4444' }}>*</span>
+                  Subject <span style={{ color: '#fb7185' }}>*</span>
                 </label>
-                <input type="text" {...register('subject')} placeholder="How can we help?" style={inputStyle} className="input-base" />
-                {errors.subject && <p style={{ fontSize: 12, color: '#ef4444', marginTop: 4 }}>{errors.subject.message}</p>}
+                <input type="text" {...register('subject')} placeholder="How can we help?" style={inputStyle}
+                  onFocus={e => { e.currentTarget.style.borderColor = 'var(--accent)'; e.currentTarget.style.boxShadow = '0 0 0 3px var(--accent-light)'; }}
+                  onBlur={e => { e.currentTarget.style.borderColor = 'var(--border)'; e.currentTarget.style.boxShadow = 'none'; }}
+                />
+                {errors.subject && <p style={{ fontSize: 12, color: '#fb7185', marginTop: 4 }}>{errors.subject.message}</p>}
               </div>
 
               <div>
                 <label style={{ fontSize: 13, fontWeight: 500, color: 'var(--text-primary)', display: 'block', marginBottom: 6 }}>
-                  Message <span style={{ color: '#ef4444' }}>*</span>
+                  Message <span style={{ color: '#fb7185' }}>*</span>
                 </label>
                 <textarea
                   {...register('message')}
                   rows={5}
                   placeholder="Tell us more about your inquiry…"
                   style={{ ...inputStyle, resize: 'none' }}
-                  className="input-base"
+                  onFocus={e => { e.currentTarget.style.borderColor = 'var(--accent)'; e.currentTarget.style.boxShadow = '0 0 0 3px var(--accent-light)'; }}
+                  onBlur={e => { e.currentTarget.style.borderColor = 'var(--border)'; e.currentTarget.style.boxShadow = 'none'; }}
                 />
-                {errors.message && <p style={{ fontSize: 12, color: '#ef4444', marginTop: 4 }}>{errors.message.message}</p>}
+                {errors.message && <p style={{ fontSize: 12, color: '#fb7185', marginTop: 4 }}>{errors.message.message}</p>}
               </div>
 
               <button
@@ -189,10 +208,12 @@ export default function ContactPage() {
                 disabled={loading}
                 style={{
                   width: '100%', padding: '13px', fontSize: 15, fontWeight: 600,
-                  background: loading ? 'var(--text-secondary)' : 'var(--accent)',
-                  color: '#fff', border: 'none', borderRadius: 'var(--radius-btn)',
-                  cursor: loading ? 'not-allowed' : 'pointer', transition: 'background 0.2s',
+                  background: loading ? 'var(--text-muted)' : 'var(--grad-primary)',
+                  color: '#04060c', border: 'none', borderRadius: 999,
+                  cursor: loading ? 'not-allowed' : 'pointer', transition: 'all 0.2s var(--ease)',
                 }}
+                onMouseEnter={e => { if (!loading) { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.filter = 'brightness(1.08)'; } }}
+                onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.filter = 'none'; }}
               >
                 {loading ? 'Sending…' : 'Send Message'}
               </button>

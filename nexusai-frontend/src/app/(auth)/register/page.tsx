@@ -52,10 +52,19 @@ export default function RegisterPage() {
 
   return (
     <div className="w-full max-w-lg">
-      <div className="bg-white rounded-3xl shadow-2xl p-8 md:p-10">
-        <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold font-[var(--font-heading)] text-[#1a1a2e] mb-2">Create Account</h1>
-          <p className="text-[#6b7280]">Register as a patient to book appointments</p>
+      <div style={{
+        background: 'var(--bg-card)',
+        border: '1px solid var(--border)',
+        borderRadius: 'var(--radius-lg)',
+        padding: '40px',
+        boxShadow: '0 30px 80px rgba(0,0,0,0.3)',
+        backdropFilter: 'blur(20px)',
+      }}>
+        <div style={{ textAlign: 'center', marginBottom: 32 }}>
+          <h1 style={{ fontFamily: 'var(--font-heading)', fontSize: 28, fontWeight: 700, color: 'var(--text-primary)', marginBottom: 8, letterSpacing: '-0.025em' }}>
+            Create Account
+          </h1>
+          <p style={{ color: 'var(--text-secondary)', fontSize: 14 }}>Register as a patient to book appointments</p>
         </div>
 
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
@@ -93,16 +102,35 @@ export default function RegisterPage() {
             error={errors.confirmPassword?.message}
             required
           />
-          <Button type="submit" fullWidth size="lg" loading={loading}>Create Account</Button>
+          <Button
+            type="submit"
+            fullWidth
+            size="lg"
+            loading={loading}
+            style={{
+              background: 'var(--grad-primary)',
+              color: '#04060c',
+              borderRadius: '999px',
+              border: 'none',
+              fontWeight: 600,
+            }}
+          >
+            Create Account
+          </Button>
         </form>
 
-        <p className="text-center text-[#6b7280] text-sm mt-6">
+        <p style={{ textAlign: 'center', color: 'var(--text-secondary)', fontSize: 14, marginTop: 24 }}>
           Already have an account?{' '}
-          <Link href="/login" className="text-[#0f4c81] font-semibold hover:underline">Sign In</Link>
+          <Link href="/login" style={{ color: 'var(--accent)', fontWeight: 600, textDecoration: 'none' }}>Sign In</Link>
         </p>
       </div>
-      <p className="text-center text-white/60 text-sm mt-6">
-        <Link href="/" className="hover:text-white transition-colors">← Back to Home</Link>
+      <p style={{ textAlign: 'center', color: 'rgba(255,255,255,0.5)', fontSize: 14, marginTop: 24 }}>
+        <Link href="/" style={{ color: 'rgba(255,255,255,0.6)', textDecoration: 'none', transition: 'color 0.2s' }}
+          onMouseEnter={e => { e.currentTarget.style.color = '#ffffff'; }}
+          onMouseLeave={e => { e.currentTarget.style.color = 'rgba(255,255,255,0.6)'; }}
+        >
+          ← Back to Home
+        </Link>
       </p>
     </div>
   );

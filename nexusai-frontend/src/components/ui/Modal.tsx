@@ -15,11 +15,11 @@ interface ModalProps {
   footer?: ReactNode;
 }
 
-const sizeClasses: Record<ModalSize, string> = {
-  sm: 'max-w-sm',
-  md: 'max-w-md',
-  lg: 'max-w-2xl',
-  xl: 'max-w-4xl',
+const SIZE_STYLES: Record<ModalSize, string> = {
+  sm:   'max-w-sm',
+  md:   'max-w-md',
+  lg:   'max-w-2xl',
+  xl:   'max-w-4xl',
   full: 'max-w-[95vw]',
 };
 
@@ -43,39 +43,72 @@ export function Modal({ isOpen, onClose, title, children, size = 'md', closeOnOv
 
   return (
     <div className="fixed inset-0 z-[400] flex items-center justify-center p-4">
+      {/* Backdrop */}
       <div
-        className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+        style={{ background: 'rgba(0,0,0,0.7)', backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)' }}
+        className="absolute inset-0"
         onClick={closeOnOverlayClick ? onClose : undefined}
       />
+
+      {/* Modal box */}
       <div
         className={cn(
-          'relative w-full bg-white rounded-2xl shadow-2xl flex flex-col max-h-[90vh]',
+          'relative w-full flex flex-col max-h-[90vh]',
           'animate-in fade-in-0 zoom-in-95 duration-200',
-          sizeClasses[size]
+          SIZE_STYLES[size]
         )}
+        style={{
+          background: 'var(--bg-secondary)',
+          border: '1px solid var(--border)',
+          borderRadius: 'var(--radius)',
+          boxShadow: '0 25px 60px -12px rgba(0,0,0,0.6)',
+        }}
         role="dialog"
         aria-modal="true"
         aria-labelledby={title ? 'modal-title' : undefined}
       >
         {title && (
-          <div className="flex items-center justify-between p-6 border-b border-[#e2e8f0] shrink-0">
-            <h2 id="modal-title" className="text-xl font-bold text-[#1a1a2e] font-[var(--font-heading)]">
+          <div
+            className="flex items-center justify-between p-6 shrink-0"
+            style={{ borderBottom: '1px solid var(--border)' }}
+          >
+            <h2
+              id="modal-title"
+              style={{
+                fontSize: 20, fontWeight: 700,
+                color: 'var(--text-primary)',
+                fontFamily: 'var(--font-heading)',
+              }}
+            >
               {title}
             </h2>
             <button
               onClick={onClose}
-              className="p-2 rounded-xl hover:bg-[#f3f4f6] transition-colors text-[#6b7280] hover:text-[#1a1a2e]"
               aria-label="Close modal"
+              style={{
+                padding: 8, borderRadius: 10, border: 'none',
+                background: 'transparent', cursor: 'pointer',
+                color: 'var(--text-secondary)',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                transition: 'background 0.2s, color 0.2s',
+              }}
+              onMouseEnter={(e) => { e.currentTarget.style.background = 'var(--bg-card)'; e.currentTarget.style.color = 'var(--text-primary)'; }}
+              onMouseLeave={(e) => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'var(--text-secondary)'; }}
             >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg style={{ width: 20, height: 20 }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
           </div>
         )}
+
         <div className="overflow-y-auto flex-1 p-6">{children}</div>
+
         {footer && (
-          <div className="p-6 border-t border-[#e2e8f0] shrink-0 flex justify-end gap-3">
+          <div
+            className="p-6 shrink-0 flex justify-end gap-3"
+            style={{ borderTop: '1px solid var(--border)' }}
+          >
             {footer}
           </div>
         )}

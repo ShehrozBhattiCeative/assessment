@@ -17,7 +17,12 @@ export function PageHeader({ breadcrumb, heading, subtitle }: PageHeaderProps) {
       <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px' }}>
         {breadcrumb && (
           <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 20, fontSize: 13 }}>
-            <Link href="/" style={{ color: 'var(--text-secondary)', textDecoration: 'none', transition: 'color 0.2s' }}>
+            <Link
+              href="/"
+              style={{ color: 'var(--text-secondary)', textDecoration: 'none', transition: 'color 0.2s' }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--accent)')}
+              onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-secondary)')}
+            >
               Home
             </Link>
             <span style={{ color: 'var(--border)' }}>/</span>
@@ -28,6 +33,7 @@ export function PageHeader({ breadcrumb, heading, subtitle }: PageHeaderProps) {
           fontSize: 'clamp(36px, 5vw, 52px)',
           fontWeight: 700,
           color: 'var(--text-primary)',
+          fontFamily: 'var(--font-heading)',
           lineHeight: 1.15,
           marginBottom: subtitle ? 16 : 0,
           transition: 'color 0.3s ease',

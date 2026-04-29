@@ -2,7 +2,6 @@
 
 import Link from 'next/link';
 import { PageHeader } from '@/components/ui/PageHeader';
-import { SectionHeader } from '@/components/ui/SectionHeader';
 
 const DEPARTMENTS = [
   { icon: '❤️', name: 'Cardiology', desc: 'Advanced cardiac care with state-of-the-art cath labs and cardiac ICU.' },
@@ -35,7 +34,7 @@ export default function AboutPage() {
         <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 64, alignItems: 'center' }}>
           <div>
             <span className="section-label">Our Story</span>
-            <h2 style={{ fontSize: 38, fontWeight: 700, color: 'var(--text-primary)', lineHeight: 1.2, marginBottom: 20 }}>
+            <h2 style={{ fontSize: 'clamp(1.8rem,3vw,2.5rem)', fontWeight: 700, fontFamily: 'var(--font-heading)', color: 'var(--text-primary)', lineHeight: 1.2, marginBottom: 20, letterSpacing: '-0.025em' }}>
               Built on trust, powered by science.
             </h2>
             <p style={{ color: 'var(--text-secondary)', lineHeight: 1.75, marginBottom: 16 }}>
@@ -44,28 +43,33 @@ export default function AboutPage() {
             <p style={{ color: 'var(--text-secondary)', lineHeight: 1.75, marginBottom: 32 }}>
               Awarded Best Hospital 2020, NABH accredited, and trusted by over a million patients — we combine clinical excellence with genuine human warmth in every interaction.
             </p>
-            <div style={{ display: 'flex', gap: 16 }}>
+            <div style={{ display: 'flex', gap: 12 }}>
               <Link href="/appointment" style={{
-                background: 'var(--accent)', color: '#fff', padding: '12px 28px',
+                background: 'var(--grad-primary)', color: '#04060c', padding: '12px 28px',
                 borderRadius: 'var(--radius-btn)', fontWeight: 600, fontSize: 14,
                 textDecoration: 'none', display: 'inline-block',
+                boxShadow: '0 10px 30px -10px rgba(34,211,238,0.4)',
               }}>
                 Book Appointment
               </Link>
               <Link href="/contact" style={{
                 color: 'var(--accent)', padding: '12px 28px',
                 borderRadius: 'var(--radius-btn)', fontWeight: 600, fontSize: 14,
-                textDecoration: 'none', border: '2px solid var(--accent)', display: 'inline-block',
-              }}>
+                textDecoration: 'none', border: '1px solid var(--border)', display: 'inline-block',
+                transition: 'border-color 0.2s',
+              }}
+                onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--accent)'; }}
+                onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--border)'; }}
+              >
                 Get in touch
               </Link>
             </div>
           </div>
-          <div style={{ borderRadius: 'var(--radius)', overflow: 'hidden', aspectRatio: '4/3' }}>
+          <div style={{ borderRadius: 'var(--radius-lg)', overflow: 'hidden', border: '1px solid var(--border)', aspectRatio: '4/3' }}>
             <img
               src="https://nirravv.github.io/Hospital-Management-Html/assets/img/gallery/hospital.jpg"
               alt="Unity Hospital"
-              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+              style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
               onError={(e) => { (e.target as HTMLImageElement).style.opacity = '0.3'; }}
             />
           </div>
@@ -76,16 +80,19 @@ export default function AboutPage() {
       <section style={{ padding: '80px 0', background: 'var(--bg-secondary)' }}>
         <div style={{ maxWidth: 860, margin: '0 auto', padding: '0 24px' }}>
           <div style={{
-            background: 'var(--bg-nav)', borderRadius: 'var(--radius)',
-            padding: '56px 64px', textAlign: 'center', position: 'relative',
+            background: 'linear-gradient(135deg,rgba(34,211,238,0.06) 0%,rgba(167,139,250,0.06) 100%)',
+            border: '1px solid rgba(34,211,238,0.15)',
+            borderRadius: 'var(--radius-lg)',
+            padding: '56px 64px', textAlign: 'center', position: 'relative', overflow: 'hidden',
           }}>
-            <div style={{ fontSize: 96, lineHeight: 0.7, color: 'var(--accent)', fontFamily: 'Georgia, serif', marginBottom: 32, opacity: 0.8 }}>
-              "
+            <div style={{ position: 'absolute', top: -40, right: -40, width: 180, height: 180, borderRadius: '50%', background: 'radial-gradient(circle,rgba(34,211,238,0.08) 0%,transparent 70%)', pointerEvents: 'none' }} />
+            <div style={{ fontSize: 80, lineHeight: 0.7, color: 'var(--accent)', fontFamily: 'Georgia, serif', marginBottom: 32, opacity: 0.7 }}>
+              &ldquo;
             </div>
-            <p style={{ fontSize: 24, fontStyle: 'italic', color: '#f1f5f9', lineHeight: 1.7, marginBottom: 32 }}>
+            <p style={{ fontSize: 22, fontStyle: 'italic', color: 'var(--text-primary)', lineHeight: 1.7, marginBottom: 32 }}>
               Well-being as a humane commitment to enliven humanity.
             </p>
-            <p style={{ color: 'rgba(255,255,255,0.55)', fontSize: 14, letterSpacing: '0.05em' }}>
+            <p style={{ color: 'var(--text-secondary)', fontSize: 14, letterSpacing: '0.05em' }}>
               — Harshil Patel, Chief Executive Officer
             </p>
           </div>
@@ -95,19 +102,26 @@ export default function AboutPage() {
       {/* Vision / Mission / Values */}
       <section style={{ padding: '80px 0', background: 'var(--bg-primary)' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px' }}>
-          <SectionHeader label="Our Purpose" heading="Why we exist." align="center" />
+          <div style={{ textAlign: 'center', marginBottom: 56 }}>
+            <span className="section-label">Our Purpose</span>
+            <h2 style={{ fontSize: 'clamp(1.8rem,3vw,2.5rem)', fontWeight: 700, fontFamily: 'var(--font-heading)', color: 'var(--text-primary)', letterSpacing: '-0.025em' }}>Why we exist.</h2>
+          </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 24 }}>
             {[
               { title: 'Vision', icon: '🔭', text: 'Enlivening humanity, one patient at a time — to be the most trusted and innovative hospital in India.' },
               { title: 'Mission', icon: '🎯', text: 'Available. Accessible. Affordable. Delivering compassionate, clinically excellent healthcare that transforms lives.' },
               { title: 'Values', icon: '⭐', text: 'Teamwork · Integrity · Responsibility · Compassion · Ethics — the five pillars that guide every decision we make.' },
             ].map((item) => (
-              <div key={item.title} className="card-hover" style={{
+              <div key={item.title} style={{
                 background: 'var(--bg-card)', border: '1px solid var(--border)',
                 borderRadius: 'var(--radius)', padding: 32, textAlign: 'center',
-              }}>
+                transition: 'all 0.25s var(--ease)',
+              }}
+                onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-4px)'; e.currentTarget.style.borderColor = 'var(--accent)'; }}
+                onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.borderColor = 'var(--border)'; }}
+              >
                 <div style={{ fontSize: 36, marginBottom: 16 }}>{item.icon}</div>
-                <h3 style={{ fontWeight: 700, fontSize: 20, color: 'var(--text-primary)', marginBottom: 12 }}>{item.title}</h3>
+                <h3 style={{ fontFamily: 'var(--font-heading)', fontWeight: 700, fontSize: 20, color: 'var(--text-primary)', marginBottom: 12 }}>{item.title}</h3>
                 <p style={{ color: 'var(--text-secondary)', lineHeight: 1.7, fontSize: 14 }}>{item.text}</p>
               </div>
             ))}
@@ -118,16 +132,23 @@ export default function AboutPage() {
       {/* Core Values */}
       <section style={{ padding: '80px 0', background: 'var(--bg-secondary)' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px' }}>
-          <SectionHeader label="Core Values" heading="What we stand for." align="left" />
+          <div style={{ marginBottom: 40 }}>
+            <span className="section-label">Core Values</span>
+            <h2 style={{ fontSize: 'clamp(1.8rem,3vw,2.5rem)', fontWeight: 700, fontFamily: 'var(--font-heading)', color: 'var(--text-primary)', letterSpacing: '-0.025em' }}>What we stand for.</h2>
+          </div>
           <div style={{ display: 'flex', gap: 20, overflowX: 'auto', paddingBottom: 8 }}>
             {CORE_VALUES.map((v) => (
-              <div key={v.num} className="card-hover" style={{
+              <div key={v.num} style={{
                 background: 'var(--bg-card)', border: '1px solid var(--border)',
                 borderRadius: 'var(--radius)', padding: '28px 24px',
                 minWidth: 200, flex: '0 0 auto',
-              }}>
-                <p style={{ fontSize: 32, fontWeight: 800, color: 'var(--accent)', marginBottom: 10, lineHeight: 1 }}>{v.num}</p>
-                <h4 style={{ fontWeight: 700, fontSize: 17, color: 'var(--text-primary)', marginBottom: 8 }}>{v.title}</h4>
+                transition: 'all 0.25s var(--ease)',
+              }}
+                onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-4px)'; e.currentTarget.style.borderColor = 'var(--accent)'; }}
+                onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.borderColor = 'var(--border)'; }}
+              >
+                <p style={{ fontSize: 28, fontWeight: 800, fontFamily: 'var(--font-heading)', background: 'var(--grad-primary)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text', marginBottom: 10, lineHeight: 1 }}>{v.num}</p>
+                <h4 style={{ fontFamily: 'var(--font-heading)', fontWeight: 700, fontSize: 17, color: 'var(--text-primary)', marginBottom: 8 }}>{v.title}</h4>
                 <p style={{ color: 'var(--text-secondary)', fontSize: 13, lineHeight: 1.65 }}>{v.desc}</p>
               </div>
             ))}
@@ -138,13 +159,20 @@ export default function AboutPage() {
       {/* Departments Grid */}
       <section style={{ padding: '80px 0', background: 'var(--bg-primary)' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px' }}>
-          <SectionHeader label="Departments" heading="Care that spans every system." align="center" />
+          <div style={{ textAlign: 'center', marginBottom: 56 }}>
+            <span className="section-label">Departments</span>
+            <h2 style={{ fontSize: 'clamp(1.8rem,3vw,2.5rem)', fontWeight: 700, fontFamily: 'var(--font-heading)', color: 'var(--text-primary)', letterSpacing: '-0.025em' }}>Care that spans every system.</h2>
+          </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 24 }}>
             {DEPARTMENTS.map((dept) => (
-              <div key={dept.name} className="card-hover" style={{
+              <div key={dept.name} style={{
                 background: 'var(--bg-card)', border: '1px solid var(--border)',
                 borderRadius: 'var(--radius)', padding: 28,
-              }}>
+                transition: 'all 0.25s var(--ease)',
+              }}
+                onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-4px)'; e.currentTarget.style.borderColor = 'var(--accent)'; }}
+                onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.borderColor = 'var(--border)'; }}
+              >
                 <div style={{
                   width: 52, height: 52, background: 'var(--accent-light)',
                   borderRadius: 12, display: 'flex', alignItems: 'center',
@@ -152,7 +180,7 @@ export default function AboutPage() {
                 }}>
                   {dept.icon}
                 </div>
-                <h3 style={{ fontWeight: 700, fontSize: 17, color: 'var(--text-primary)', marginBottom: 8 }}>{dept.name}</h3>
+                <h3 style={{ fontFamily: 'var(--font-heading)', fontWeight: 700, fontSize: 17, color: 'var(--text-primary)', marginBottom: 8 }}>{dept.name}</h3>
                 <p style={{ color: 'var(--text-secondary)', fontSize: 13, lineHeight: 1.65 }}>{dept.desc}</p>
               </div>
             ))}
@@ -161,21 +189,30 @@ export default function AboutPage() {
       </section>
 
       {/* CTA */}
-      <section style={{ padding: '80px 0', background: 'var(--bg-nav)' }}>
-        <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px', textAlign: 'center' }}>
-          <h2 style={{ fontSize: 38, fontWeight: 700, color: '#ffffff', marginBottom: 16 }}>
-            Your care journey starts here.
-          </h2>
-          <p style={{ color: 'rgba(255,255,255,0.6)', marginBottom: 36, fontSize: 17 }}>
-            Schedule a consultation with our specialists today.
-          </p>
-          <Link href="/appointment" style={{
-            background: 'var(--accent)', color: '#fff', padding: '14px 36px',
-            borderRadius: 'var(--radius-btn)', fontWeight: 600, fontSize: 16,
-            textDecoration: 'none', display: 'inline-block',
+      <section style={{ padding: '80px 0', background: 'var(--bg-secondary)' }}>
+        <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px' }}>
+          <div style={{
+            background: 'linear-gradient(135deg,rgba(34,211,238,0.08) 0%,rgba(167,139,250,0.08) 100%)',
+            border: '1px solid rgba(34,211,238,0.2)',
+            borderRadius: 'var(--radius-lg)', padding: '64px 48px', textAlign: 'center', position: 'relative', overflow: 'hidden',
           }}>
-            Book Appointment
-          </Link>
+            <div style={{ position: 'absolute', top: -50, right: -50, width: 200, height: 200, borderRadius: '50%', background: 'radial-gradient(circle,rgba(34,211,238,0.1) 0%,transparent 70%)', pointerEvents: 'none' }} />
+            <span className="section-label">Your Journey</span>
+            <h2 style={{ fontSize: 'clamp(1.8rem,3vw,2.5rem)', fontWeight: 700, fontFamily: 'var(--font-heading)', color: 'var(--text-primary)', marginBottom: 16, letterSpacing: '-0.025em' }}>
+              Your care journey starts here.
+            </h2>
+            <p style={{ color: 'var(--text-secondary)', marginBottom: 36, fontSize: 16, maxWidth: 440, margin: '0 auto 36px' }}>
+              Schedule a consultation with our specialists today.
+            </p>
+            <Link href="/appointment" style={{
+              background: 'var(--grad-primary)', color: '#04060c', padding: '14px 36px',
+              borderRadius: 'var(--radius-btn)', fontWeight: 600, fontSize: 15,
+              textDecoration: 'none', display: 'inline-block',
+              boxShadow: '0 10px 30px -10px rgba(34,211,238,0.5)',
+            }}>
+              Book Appointment
+            </Link>
+          </div>
         </div>
       </section>
     </div>

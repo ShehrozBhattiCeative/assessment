@@ -41,10 +41,19 @@ export default function LoginPage() {
 
   return (
     <div className="w-full max-w-md">
-      <div className="bg-white rounded-3xl shadow-2xl p-8 md:p-10">
-        <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold font-[var(--font-heading)] text-[#1a1a2e] mb-2">Welcome Back</h1>
-          <p className="text-[#6b7280]">Sign in to your Unity Hospital account</p>
+      <div style={{
+        background: 'var(--bg-card)',
+        border: '1px solid var(--border)',
+        borderRadius: 'var(--radius-lg)',
+        padding: '40px',
+        boxShadow: '0 30px 80px rgba(0,0,0,0.3)',
+        backdropFilter: 'blur(20px)',
+      }}>
+        <div style={{ textAlign: 'center', marginBottom: 32 }}>
+          <h1 style={{ fontFamily: 'var(--font-heading)', fontSize: 28, fontWeight: 700, color: 'var(--text-primary)', marginBottom: 8, letterSpacing: '-0.025em' }}>
+            Welcome Back
+          </h1>
+          <p style={{ color: 'var(--text-secondary)', fontSize: 14 }}>Sign in to your Unity Hospital account</p>
         </div>
 
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
@@ -67,29 +76,48 @@ export default function LoginPage() {
             onRightIconClick={() => setShowPass(!showPass)}
           />
 
-          <Button type="submit" fullWidth size="lg" loading={isLoading}>
+          <Button
+            type="submit"
+            fullWidth
+            size="lg"
+            loading={isLoading}
+            style={{
+              background: 'var(--grad-primary)',
+              color: '#04060c',
+              borderRadius: '999px',
+              border: 'none',
+              fontWeight: 600,
+            }}
+          >
             Sign In
           </Button>
         </form>
 
-        <div className="mt-6 text-center space-y-3">
-          <p className="text-[#6b7280] text-sm">
-            Don't have an account?{' '}
-            <Link href="/register" className="text-[#0f4c81] font-semibold hover:underline">
+        <div style={{ marginTop: 24, textAlign: 'center' }}>
+          <p style={{ color: 'var(--text-secondary)', fontSize: 14, marginBottom: 16 }}>
+            Don&apos;t have an account?{' '}
+            <Link href="/register" style={{ color: 'var(--accent)', fontWeight: 600, textDecoration: 'none' }}>
               Register as Patient
             </Link>
           </p>
-          <div className="pt-4 border-t border-[#e2e8f0]">
-            <p className="text-xs text-[#9ca3af] mb-2">Demo credentials:</p>
-            <p className="text-xs text-[#6b7280]">Admin: admin@nexusai.com</p>
-            <p className="text-xs text-[#6b7280]">Patient: aditi.sharma@email.com</p>
-            <p className="text-xs text-[#6b7280]">Password: <span className="font-mono">password123</span> (hashed in DB)</p>
+          <div style={{ paddingTop: 16, borderTop: '1px solid var(--border)' }}>
+            <p style={{ fontSize: 12, color: 'var(--text-muted)', marginBottom: 6 }}>Demo credentials:</p>
+            <div style={{ background: 'rgba(34,211,238,0.05)', border: '1px solid rgba(34,211,238,0.15)', borderRadius: 10, padding: '12px 16px' }}>
+              <p style={{ fontSize: 12, color: 'var(--text-secondary)', marginBottom: 2 }}>Admin: admin@nexusai.com</p>
+              <p style={{ fontSize: 12, color: 'var(--text-secondary)', marginBottom: 2 }}>Patient: aditi.sharma@email.com</p>
+              <p style={{ fontSize: 12, color: 'var(--text-secondary)' }}>Password: <span style={{ fontFamily: 'monospace' }}>password123</span> (hashed in DB)</p>
+            </div>
           </div>
         </div>
       </div>
 
-      <p className="text-center text-white/60 text-sm mt-6">
-        <Link href="/" className="hover:text-white transition-colors">← Back to Home</Link>
+      <p style={{ textAlign: 'center', color: 'rgba(255,255,255,0.5)', fontSize: 14, marginTop: 24 }}>
+        <Link href="/" style={{ color: 'rgba(255,255,255,0.6)', textDecoration: 'none', transition: 'color 0.2s' }}
+          onMouseEnter={e => { e.currentTarget.style.color = '#ffffff'; }}
+          onMouseLeave={e => { e.currentTarget.style.color = 'rgba(255,255,255,0.6)'; }}
+        >
+          ← Back to Home
+        </Link>
       </p>
     </div>
   );

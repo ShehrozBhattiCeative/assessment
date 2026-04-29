@@ -2,91 +2,136 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { Avatar } from '@/components/ui/Avatar';
 import { useAuthStore } from '@/store/auth.store';
 import { NAV_LINKS } from '@/constants';
 
 export function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
+  const [hidden, setHidden] = useState(false);
   const pathname = usePathname();
+  const lastY    = useRef(0);
+
   const { isAuthenticated, user, logout } = useAuthStore();
 
+  /* Hide nav on scroll-down, reveal on scroll-up */
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 30);
-    window.addEventListener('scroll', onScroll);
+    const onScroll = () => {
+      const y = window.scrollY;
+      if (y > 120 && y > lastY.current) setHidden(true);
+      else setHidden(false);
+      lastY.current = y;
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
   const isActive = (href: string) =>
     href === '/' ? pathname === '/' : pathname.startsWith(href);
 
-  return (
-    <header style={{
-      position: 'fixed', top: 0, left: 0, right: 0, zIndex: 200,
-      background: 'var(--bg-nav)',
-      boxShadow: scrolled ? '0 2px 24px rgba(0,0,0,0.4)' : 'none',
-      transition: 'box-shadow 0.3s',
-      height: 68,
-    }}>
-      <div style={{
-        maxWidth: 1200, margin: '0 auto', padding: '0 24px',
-        height: '100%', display: 'flex', alignItems: 'center',
-        justifyContent: 'space-between', gap: 16,
-      }}>
+  /* Floating-pill nav transform */
+  const navTransform = hidden
+    ? 'translateX(-50%) translateY(-140%)'
+    : 'translateX(-50%) translateY(0)';
 
-        {/* ── Logo ───────────────────────────────────────────────────── */}
-        <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none', flexShrink: 0 }}>
-          {/* Hospital cross icon */}
-          <div style={{
-            width: 36, height: 36, borderRadius: 8,
-            background: 'var(--accent)',
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
+  return (
+    <>
+      {/* ── FLOATING PILL NAV ──────────────────────────────────────────────── */}
+      <nav
+        style={{
+          position: 'fixed',
+          top: 18,
+          left: '50%',
+          transform: navTransform,
+          width: 'calc(100% - 32px)',
+          maxWidth: 1240,
+          zIndex: 200,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          padding: '10px 16px 10px 20px',
+          borderRadius: 999,
+          background: 'rgba(11, 16, 32, 0.60)',
+          backdropFilter: 'saturate(140%) blur(20px)',
+          WebkitBackdropFilter: 'saturate(140%) blur(20px)',
+          border: '1px solid var(--border)',
+          boxShadow: '0 8px 32px rgba(0,0,0,0.35)',
+          transition: 'transform 0.4s cubic-bezier(0.22,1,0.36,1)',
+        }}
+        aria-label="Primary"
+      >
+        {/* ── Logo ─────────────────────────────────────────────────────── */}
+        <Link
+          href="/"
+          style={{ display: 'inline-flex', alignItems: 'center', gap: 10, textDecoration: 'none', flexShrink: 0 }}
+        >
+          {/* Brand mark — gradient square with + cross */}
+          <span style={{
+            width: 34, height: 34,
+            display: 'grid', placeItems: 'center',
+            borderRadius: 10,
+            background: 'var(--grad-primary)',
             flexShrink: 0,
+            position: 'relative',
           }}>
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="white">
-              <rect x="8" y="2" width="4" height="16" rx="1"/>
-              <rect x="2" y="8" width="16" height="4" rx="1"/>
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="#04060c">
+              <rect x="7.5" y="2" width="3" height="14" rx="1.5" />
+              <rect x="2" y="7.5" width="14" height="3" rx="1.5" />
             </svg>
-          </div>
-          <div style={{ lineHeight: 1 }}>
-            <p style={{ fontWeight: 700, fontSize: 16, color: '#ffffff', marginBottom: 1 }}>Unity</p>
-            <p style={{ fontSize: 10, color: 'rgba(255,255,255,0.45)', fontWeight: 400 }}>Hospital</p>
-          </div>
+          </span>
+          {/* Brand name */}
+          <span style={{ display: 'flex', flexDirection: 'column', lineHeight: 1 }}>
+            <span style={{ fontFamily: 'var(--font-heading)', fontWeight: 600, fontSize: 17, color: '#ffffff', letterSpacing: '-0.01em' }}>Unity</span>
+            <span style={{ fontSize: 9.5, color: 'rgba(255,255,255,0.45)', letterSpacing: '0.22em', marginTop: 3, textTransform: 'uppercase', fontWeight: 500 }}>Hospital</span>
+          </span>
         </Link>
 
-        {/* ── Desktop Nav ────────────────────────────────────────────── */}
-        <nav style={{ display: 'flex', alignItems: 'center', gap: 0, flex: 1, justifyContent: 'center' }}
-          className="hidden lg:flex">
-          {NAV_LINKS.map((link) => {
+        {/* ── Desktop nav links ─────────────────────────────────────────── */}
+        <ul
+          style={{ display: 'flex', gap: 2, listStyle: 'none', margin: 0, padding: 0 }}
+          className="hidden lg:flex"
+        >
+          {NAV_LINKS.map(link => {
             const active = isActive(link.href);
             return (
-              <Link
-                key={link.href}
-                href={link.href}
-                style={{
-                  padding: '8px 12px',
-                  fontSize: 14, fontWeight: 500,
-                  color: active ? 'var(--accent)' : 'rgba(255,255,255,0.78)',
-                  textDecoration: 'none',
-                  borderRadius: 6,
-                  transition: 'color 0.18s',
-                  whiteSpace: 'nowrap',
-                  borderBottom: active ? '2px solid var(--accent)' : '2px solid transparent',
-                }}
-                onMouseEnter={(e) => { if (!active) e.currentTarget.style.color = 'var(--accent)'; }}
-                onMouseLeave={(e) => { if (!active) e.currentTarget.style.color = 'rgba(255,255,255,0.78)'; }}
-              >
-                {link.label}
-              </Link>
+              <li key={link.href}>
+                <Link
+                  href={link.href}
+                  style={{
+                    display: 'inline-block',
+                    padding: '7px 13px',
+                    fontSize: 14,
+                    fontWeight: 500,
+                    color: active ? '#ffffff' : 'rgba(255,255,255,0.62)',
+                    textDecoration: 'none',
+                    borderRadius: 999,
+                    background: active ? 'rgba(255,255,255,0.10)' : 'transparent',
+                    transition: 'color 0.18s, background 0.18s',
+                    whiteSpace: 'nowrap',
+                  }}
+                  onMouseEnter={e => {
+                    if (!active) {
+                      e.currentTarget.style.color = '#ffffff';
+                      e.currentTarget.style.background = 'rgba(255,255,255,0.07)';
+                    }
+                  }}
+                  onMouseLeave={e => {
+                    if (!active) {
+                      e.currentTarget.style.color = 'rgba(255,255,255,0.62)';
+                      e.currentTarget.style.background = 'transparent';
+                    }
+                  }}
+                >
+                  {link.label}
+                </Link>
+              </li>
             );
           })}
-        </nav>
+        </ul>
 
-        {/* ── Right side (desktop) ───────────────────────────────────── */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexShrink: 0 }}
-          className="hidden lg:flex">
+        {/* ── Right actions ────────────────────────────────────────────── */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexShrink: 0 }}>
           <ThemeToggle />
 
           {isAuthenticated ? (
@@ -96,31 +141,31 @@ export function Navbar() {
                   href="/admin"
                   style={{
                     padding: '7px 14px', fontSize: 13, fontWeight: 500,
-                    color: 'rgba(255,255,255,0.78)', textDecoration: 'none',
-                    borderRadius: 6, transition: 'color 0.18s',
+                    color: 'rgba(255,255,255,0.72)', textDecoration: 'none',
+                    borderRadius: 999, transition: 'color 0.18s',
                   }}
-                  onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--accent)')}
-                  onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(255,255,255,0.78)')}
+                  onMouseEnter={e => (e.currentTarget.style.color = '#22d3ee')}
+                  onMouseLeave={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.72)')}
                 >
                   Dashboard
                 </Link>
               )}
-              <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 7 }}>
                 <Avatar name={user?.name} size="sm" />
-                <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.7)', maxWidth: 110, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.65)', maxWidth: 100, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                   {user?.name}
                 </span>
               </div>
               <button
                 onClick={() => logout()}
                 style={{
-                  padding: '7px 16px', fontSize: 13, fontWeight: 500,
-                  color: 'rgba(255,255,255,0.78)', background: 'transparent',
-                  border: '1px solid rgba(255,255,255,0.2)', borderRadius: 6,
+                  padding: '8px 16px', fontSize: 13, fontWeight: 500,
+                  color: 'rgba(255,255,255,0.72)', background: 'transparent',
+                  border: '1px solid rgba(255,255,255,0.18)', borderRadius: 999,
                   cursor: 'pointer', transition: 'all 0.18s',
                 }}
-                onMouseEnter={(e) => { e.currentTarget.style.borderColor = 'var(--accent)'; e.currentTarget.style.color = 'var(--accent)'; }}
-                onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.2)'; e.currentTarget.style.color = 'rgba(255,255,255,0.78)'; }}
+                onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--accent)'; e.currentTarget.style.color = 'var(--accent)'; }}
+                onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.18)'; e.currentTarget.style.color = 'rgba(255,255,255,0.72)'; }}
               >
                 Logout
               </button>
@@ -130,33 +175,40 @@ export function Navbar() {
               <Link
                 href="/login"
                 style={{
-                  padding: '7px 16px', fontSize: 13, fontWeight: 500,
-                  color: 'rgba(255,255,255,0.78)', textDecoration: 'none',
-                  border: '1px solid rgba(255,255,255,0.2)', borderRadius: 6,
+                  padding: '8px 16px', fontSize: 13, fontWeight: 500,
+                  color: 'rgba(255,255,255,0.72)', textDecoration: 'none',
+                  border: '1px solid rgba(255,255,255,0.18)', borderRadius: 999,
                   transition: 'all 0.18s',
                 }}
-                onMouseEnter={(e) => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.5)'; e.currentTarget.style.color = '#fff'; }}
-                onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.2)'; e.currentTarget.style.color = 'rgba(255,255,255,0.78)'; }}
+                onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.4)'; e.currentTarget.style.color = '#fff'; }}
+                onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.18)'; e.currentTarget.style.color = 'rgba(255,255,255,0.72)'; }}
               >
-                Login
+                Sign in
               </Link>
               <Link
                 href="/appointment"
                 style={{
-                  padding: '8px 18px', fontSize: 13, fontWeight: 600,
-                  color: '#ffffff', background: 'var(--accent)',
-                  borderRadius: 6, textDecoration: 'none', transition: 'background 0.18s',
+                  display: 'inline-flex', alignItems: 'center', gap: 6,
+                  padding: '9px 18px', fontSize: 13, fontWeight: 600,
+                  color: '#04060c', background: 'var(--grad-primary)',
+                  borderRadius: 999, textDecoration: 'none',
+                  boxShadow: '0 6px 20px -6px rgba(34,211,238,0.5)',
+                  transition: 'filter 0.18s',
                 }}
-                onMouseEnter={(e) => (e.currentTarget.style.background = 'var(--accent-hover)')}
-                onMouseLeave={(e) => (e.currentTarget.style.background = 'var(--accent)')}
+                onMouseEnter={e => (e.currentTarget.style.filter = 'brightness(1.08)')}
+                onMouseLeave={e => (e.currentTarget.style.filter = 'brightness(1)')}
               >
-                Book Now
+                Book
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M5 12h14M13 5l7 7-7 7" />
+                </svg>
               </Link>
             </>
           )}
         </div>
 
-      </div>
-    </header>
+      </nav>
+
+    </>
   );
 }
