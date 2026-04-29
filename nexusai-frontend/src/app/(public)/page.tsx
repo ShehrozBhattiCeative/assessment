@@ -9,8 +9,8 @@ import { TestimonialCard } from '@/components/ui/TestimonialCard';
 import { SectionHeader } from '@/components/ui/SectionHeader';
 import { doctorsApi, blogsApi, packagesApi, testimonialsApi, statsApi, departmentsApi } from '@/lib/api';
 
-const HERO_IMG = 'https://nirravv.github.io/Hospital-Management-Html/assets/img/slider/1.jpg';
-const ABOUT_IMG = 'https://nirravv.github.io/Hospital-Management-Html/assets/img/bg/1.jpg';
+const HERO_IMG = 'https://images.unsplash.com/photo-1586773860418-d37222d8fce3?w=1600&q=80';
+const ABOUT_IMG = 'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=900&q=80';
 
 const SPECIALTIES = [
   { icon: '🚑', name: '24/7 Ambulance Response', desc: 'Round-the-clock emergency response with advanced life support.' },
@@ -83,8 +83,7 @@ export default function HomePage() {
       setPackages(p as any[]);
       setTestimonials((t as any[]).slice(0, 3));
       setStats(s);
-      setLoading(false);
-    });
+    }).catch(() => {}).finally(() => setLoading(false));
   }, []);
 
   return (
@@ -269,11 +268,11 @@ export default function HomePage() {
             action={<Link href="/doctors" style={{ color: 'var(--accent)', fontWeight: 600, textDecoration: 'none', fontSize: 14 }}>View all →</Link>}
           />
           {loading ? (
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: 24 }}>
-              {Array(4).fill(null).map((_, i) => <div key={i} className="skeleton" style={{ height: 320, borderRadius: 12 }} />)}
+            <div className="doctors-grid">
+              {Array(5).fill(null).map((_, i) => <div key={i} className="skeleton" style={{ height: 320, borderRadius: 12 }} />)}
             </div>
           ) : (
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: 24 }}>
+            <div className="doctors-grid">
               {doctors.map((doc: any) => <DoctorCard key={doc.id} doctor={doc} />)}
             </div>
           )}

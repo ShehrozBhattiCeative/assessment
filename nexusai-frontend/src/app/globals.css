@@ -158,6 +158,25 @@ section, div, header, footer, nav, aside, article, main {
   .cards-grid-4 { grid-template-columns: 1fr; }
 }
 
+/* Doctors grid — scales with screen: 5 col on XL, 4 on large, 3 on medium, 2 on tablet, 1 on mobile */
+.doctors-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: clamp(16px, 2vw, 28px);
+}
+@media (max-width: 1600px) {
+  .doctors-grid { grid-template-columns: repeat(4, 1fr); }
+}
+@media (max-width: 1100px) {
+  .doctors-grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 768px) {
+  .doctors-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 480px) {
+  .doctors-grid { grid-template-columns: 1fr; }
+}
+
 /* 3-col grid: 3 → 2 → 1 */
 .cards-grid-3 {
   display: grid;
