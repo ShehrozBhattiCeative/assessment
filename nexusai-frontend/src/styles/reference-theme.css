@@ -1,20 +1,4 @@
-/*
- * REFERENCE DESIGN TOKENS
- * Extracted from: https://nirravv.github.io/Hospital-Management-Html/index.html
- * Source repo:    https://github.com/nirravv/Hospital-Management-Html (master branch, assets/css/modern.css)
- *
- * This file is the single source of truth for all visual design decisions.
- * Do not use these variables directly in components — they are mapped to the
- * theme variables in globals.css (:root / [data-theme="dark"]).
- */
 
-/* ─── TYPOGRAPHY ──────────────────────────────────────────────────────────────
-   Fonts loaded via Google Fonts (add to layout <head>):
-   Inter: body copy, labels, UI text
-   Space Grotesk: headings, display text
-   Import URL:
-     https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap
-*/
 :root {
   --ref-font-body:    'Inter', system-ui, -apple-system, sans-serif;
   --ref-font-heading: 'Space Grotesk', 'Inter', sans-serif;
